@@ -1,0 +1,6 @@
+# Auto-generated stuff
+Thumbs.db
+sftp-config.json
+
+# data directory
+data/*.json
