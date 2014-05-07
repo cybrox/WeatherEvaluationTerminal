@@ -14,7 +14,7 @@
   require_once('./core/database-handler.class.php');
   require_once('./core/request-handler.class.php');
 
-  $requestLink = explode("/wapi/", $_SERVER['REQUEST_URI']);
+  $requestLink = explode("/api/", $_SERVER['REQUEST_URI']);
   $requestData = explode("/", $requestLink[1]);
 
   $requestHandler = new RequestHandler($requestData);
