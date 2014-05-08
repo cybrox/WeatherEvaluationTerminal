@@ -36,7 +36,7 @@
 
       if($this->reqScope == "notifications"){
         $this->notHandler = new NotificationHandler();
-        if($this->reqAction == "read") $this->responseIs = $this->notHandler->readNotification($this->reqParams);
+        if($this->reqAction == "read")  $this->responseIs = $this->notHandler->readNotification();
         if($this->reqAction == "write") $this->responseIs = $this->notHandler->markNotification($this->reqParams);
       }
       if($this->reqScope == "weatherdata"){
@@ -44,7 +44,9 @@
         if($this->reqAction == "read") $this->responseIs = $this->wetHandler->readWeatherdata($this->reqParams);
       } 
 
-      return $this->publish($this->responseIs[0], $this->responseIs[1]);
+      if (empty($this->responseIs[0]))   return $this->publish(true, $this->responseIs);
+      if ($this->responseIs[0] == false) return $this->publish(false, $this->responseIs[1]);
+      else return $this->publish(true, $this->responseIs);
     }
 
 
