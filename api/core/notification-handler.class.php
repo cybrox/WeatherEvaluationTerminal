@@ -21,7 +21,9 @@
       return $this->db->findRead('notifications', 'seen', false);
     }
 
-    public function writeNotification($params){
+    public function writeNotification($message){}
+
+    public function markNotification($params){
       if(!preg_match('#[0-9]{1,}#', $params[2])) return array(false, 'invalid notification id');
       else return $this->db->findWrite('notifications', 'id', $params[2], 'seen', true);
     }
