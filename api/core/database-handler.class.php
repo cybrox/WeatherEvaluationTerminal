@@ -55,9 +55,13 @@
 
     public function findWrite($filename, $find, $for, $key, $val){
       $fileContent = $this->readStream($filename);
-      foreach($fileContent['data'] as $entry){
+      foreach($fileContent['data'] as $k => $entry){
         if ($entry[$find] == $for){
-          $entry[$key] = $entry[$value];
+          $setnew = $entry;
+          $setnew[$key] = $val;
+          unset($fileContent['data'][$k]);
+          array_push($fileContent['data'], $setnew);
+          $this->writeStream($filename, $fileContent);
           return array(true, 'write successful');
         }
       }

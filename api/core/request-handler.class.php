@@ -44,9 +44,11 @@
         if($this->reqAction == "read") $this->responseIs = $this->wetHandler->readWeatherdata($this->reqParams);
       } 
 
-      if (empty($this->responseIs[0]))   return $this->publish(true, $this->responseIs);
-      if ($this->responseIs[0] == false) return $this->publish(false, $this->responseIs[1]);
-      else return $this->publish(true, $this->responseIs);
+      if(!isset($this->responseIs[0]))  return $this->publish(true, $this->responseIs);
+      if($this->responseIs[0] == true)  return $this->publish(true ,$this->responseIs);
+      if($this->responseIs[0] == false) return $this->publish(false, $this->responseIs[1]);
+      if($this->responseIs[0] == true && gettype($this->responseIs[1] == "string"))
+        return $this->publish(true ,$this->responseIs[1]);
     }
 
 
