@@ -41,7 +41,8 @@
       }
       if($this->reqScope == "weatherdata"){
         $this->wetHandler = new WeatherdataHandler();
-        if($this->reqAction == "read") $this->responseIs = $this->wetHandler->readWeatherdata($this->reqParams);
+        if($this->reqAction == "read")  $this->responseIs = $this->wetHandler->readWeatherdata($this->reqParams);
+        if($this->reqAction == "write") $this->responseIs = $this->wetHandler->writeWeatherdata($this->reqParams);
       } 
 
       if(!isset($this->responseIs[0]))  return $this->publish(true, $this->responseIs);
