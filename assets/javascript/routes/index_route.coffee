@@ -1,12 +1,13 @@
 App.IndexRoute = Ember.Route.extend
-	beforeModel: ->
-		@transitionTo 'month', @getCurrentMonth()
+  beforeModel: ->
+    @transitionTo 'weather', @getCurrentYear(), @getCurrentMonth()
 
-	getCurrentMonth: ->
-		currentDate  = new Date()
-		currentYear  = currentDate.getFullYear()
-		currentMonth = currentDate.getMonth() + 1
+  getCurrentYear: ->
+    currentDate  = new Date()
+    currentDate.getFullYear()
 
-		currentMonth = "0"+currentMonth if currentMonth < 10
-
-		"#{currentYear}-#{currentMonth}"
+  getCurrentMonth: ->
+    currentDate  = new Date()
+    currentMonth = currentDate.getMonth() + 1
+    currentMonth = "0"+currentMonth if currentMonth < 10
+    currentMonth
