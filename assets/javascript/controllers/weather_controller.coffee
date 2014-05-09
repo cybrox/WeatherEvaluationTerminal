@@ -1,0 +1,1 @@
+App.MonthController = Ember.ArrayController.extend
