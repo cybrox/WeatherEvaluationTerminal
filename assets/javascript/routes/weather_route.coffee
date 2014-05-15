@@ -1,8 +1,8 @@
-App.MonthRoute = Ember.Route.extend
-	model: (params) ->
-		date = params.month_id.split '-'
+App.WeatherRoute = Ember.Route.extend
+  model: (params) ->
+    @set 'year',  params.year
+    @set 'month', params.month
 
-		@set 'year',  date[0]
-		@set 'month', date[1]
-
-		Ember.$.getJSON "api/get.php?f="+params.month_id
+  setupController: (controller, model) ->
+    @_super(controller, model)
+    @controllerFor('weather').setProperties('year': @get('year'), 'month': @get('month'))

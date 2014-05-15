@@ -1,1 +1,1 @@
-App.NotificationsController = Ember.Controller.extend
+App.NotificationsController = Ember.Controller.extend()
