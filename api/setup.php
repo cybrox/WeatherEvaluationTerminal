@@ -13,8 +13,10 @@
   require_once('./lib/crunchroot.class.php');
   require_once('./lib/crunchtable.class.php');
 
+  rmdir('../data');
+  mkdir('../data');
+
   $cdb = new crunchDB('../data');
-  $cdb->create('weatherdata');
   $cdb->create('notification');
 
 ?>

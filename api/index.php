@@ -20,7 +20,6 @@
   $requestData = explode("/", $requestLink[1]);
 
   if(count($requestData) < 2) $wetapi->publish(false, 'invalid api call, no method selected');
-  if(!in_array($requestData[0], array('get','set'))) $wetapi->publish(false, 'invalid api call type');
 
   $requestFunc = $requestData[0].'_'.$requestData[1];
   array_splice($requestData, 0, 2);
