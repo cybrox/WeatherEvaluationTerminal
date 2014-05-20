@@ -13,10 +13,19 @@
   require_once('./lib/crunchroot.class.php');
   require_once('./lib/crunchtable.class.php');
 
-  rmdir('../data');
-  mkdir('../data');
+  $dir = '../data';
 
-  $cdb = new crunchDB('../data');
+  foreach(scandir($dir) as $file) {
+    if ('.' === $file || '..' === $file) continue;
+    if (is_dir("$dir/$file")) rmdir_recursive("$dir/$file");
+    else unlink("$dir/$file");
+  }
+  rmdir($dir);
+  mkdir($dir);
+
+  $cdb = new crunchDB($dir);
   $cdb->create('notification');
+
+  echo 'setup complete. thanx!';
 
 ?>
