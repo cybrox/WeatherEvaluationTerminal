@@ -80,8 +80,9 @@
       else $this->publish(true, array()); #return empty array
     }
 
-    protected function create_weatherdata($_month, $time, $temp, $wdir, $wspd, $rain, $humd){
+    protected function create_weatherdata($_month=0, $time=0, $temp=50, $wdir=-1, $wspd=-1, $rain=-1, $humd=-1){
       $month = 'wet'.$_month;
+      if(func_num_args() != 7) $this->publish(false, 'not enough arguments given');
       if(!in_array($month, $this->cdb->tables())) $this->cdb->create($month);
 
       if($time == 0)                $this->publish(false, 'invalid timestamp value');
