@@ -80,9 +80,12 @@
       else $this->publish(true, array()); #return empty array
     }
 
-    protected function create_weatherdata($_month=0, $time=0, $temp=50, $wdir=-1, $wspd=-1, $rain=-1, $humd=-1){
-      $month = 'wet'.$_month;
-      if(func_num_args() != 7) $this->publish(false, 'not enough arguments given');
+    protected function create_weatherdata($time=0, $temp=50, $wdir=-1, $wspd=-1, $rain=-1, $humd=-1){
+      $y = date('Y', $time);
+      $m = date('m', $time);
+      $d = date('d', $time); 
+      $month = 'wet'.$y.'-'.$m;
+      if(func_num_args() != 6) $this->publish(false, 'not enough arguments given');
       if(!in_array($month, $this->cdb->tables())) $this->cdb->create($month);
 
       if($time == 0)                $this->publish(false, 'invalid timestamp value');
@@ -91,9 +94,6 @@
       if($wspd < 0 || $wspd > 100)  $this->publish(false, 'invalid wind speed value');
       if($rain < 0 || $rain > 15)   $this->publish(false, 'invalid rain volume value');
       if($humd < 0 || $humd > 100)  $this->publish(false, 'invalid humidity value');
-
-      $m = date('m', $time);
-      $d = date('d', $time); 
 
       $this->cdb->insert($month, array(
         'month' => $m,
