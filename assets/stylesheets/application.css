@@ -12,7 +12,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: url(../images/w_sunny.jpg) left top no-repeat;
+	background: url(../images/background.jpg) left top no-repeat;
 	background-position: fixed;
 	background-size: cover;
 }
@@ -32,20 +32,22 @@ footer,
 */
 header {
 	width: 100%;
-	height: 300px;
-	padding: 18px 10%;
+	padding: 100px 10%;
 	border-bottom: 1px solid #bbb;
 }
 
 #pagename {
-	margin: 0;
-	padding: 0;
-	height: 300px;
-	line-height: 300px;
-	color: #eee;
+	color: #000080;
 	font-size: 5em;
 	font-weight: bold;
-	text-shadow: 0 -2px 2px #aaa;
+	text-shadow: 0 -2px 2px #4F94CD;
+}
+
+#notifications { margin-top: 30px; }
+#notifications img { vertical-align: text-bottom; }
+#notifications strong {
+	font-size: 1.6em;
+	font-weight: normal;
 }
 
 #monthpick, #monthpick button { color: #fff; }
@@ -54,37 +56,6 @@ header {
 	margin-top: -60px;
 	font-size: 1.2em;
 }
-
-#warnings {
-	display: block;
-	position: absolute;
-	right: 10%;
-	top: -1px;
-	font-size: 2em;
-	font-weight: bold;
-	text-decoration: none !important;
-	padding: 5px 25px;
-	color: #fff;
-	background: rgba(255, 106, 106, 0.52);
-	border: 1px solid #FF6A6A;
-	border-radius: 0 8px 8px 0;
-	-moz-border-radius: 0 0 8px 8px;
-	-webkit-border-radius: 0 0 8px 8px;
-}
-
-#warnings:hover {
-	background: rgba(255, 106, 106, 0.7);
-	cursor: pointer;
-}
-
-#warningsBack { float: right; }
-
-.warningTime { display: inline-block; padding-right: 30px; }
-.warningMessage { width: 100%; }
-.warningMessage,
-.warningTime { vertical-align: middle !important; }
-
-
 
 /************************************************
 ** Content

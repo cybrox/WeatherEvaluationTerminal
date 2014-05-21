@@ -17,13 +17,16 @@
 </head>
 <body>
 
-	<!-- Application template -->
-	<script type="text/x-handlebars">
-		<header>
-			<div id="headline">
-				<h1 id="pagename">Wetterstation</h1>
+	<!-- Application template - ->
+	<script type="text/x-handlebars">-->
+		<header class="clearfix">
+			<span id="pagename">Wetterstation</span>
+			<div class="pull-right">
+			  <div class="btn btn-primary" id="notifications">
+			    <img src="assets/images/notifications.png" />
+			    <strong>00</strong>
+			  </div>
 			</div>
-			<div class="break"></div>
 		</header>
 		<section id="content">
 			<section id="contentInner">
@@ -36,11 +39,11 @@
 				Webinterface written and copyrighted 2014+ by Sven Marc 'cybrox' Gehring.
 			</span>
 		</footer>
-	</script>
+	<!--</script>-->
 
 
 
-	<!-- Page: "index" "/" -->
+	<!-- Page: "index" "/" - ->
 	<script type="text/x-handlebars" id="index">
 		Loading recent weather data...
 	</script>
@@ -109,12 +112,12 @@
 	</script>
 
 
--->
-	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/handlebars.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/ember.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/chart.min.js"></script>
 	<script type="text/javascript" src="assets/compiled/application.js"></script>
-
+-->
+	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/vendor/bootstrap.min.js"></script>
 </body>
 </html>
