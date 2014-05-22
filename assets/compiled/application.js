@@ -12,7 +12,49 @@
     year: 0,
     blip: (function() {
       return console.log(this.get('year'));
-    }).property('year')
+    }).property('year'),
+    currentMonth: (function() {
+      var monthList;
+      monthList = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+      return monthList[parseInt(this.get('month')) - 1] + " &bull; " + this.get('year');
+    }).property('year', 'month'),
+    strPad: function(num) {
+      if (parseInt(num) < 10) {
+        return "0" + num;
+      } else {
+        return num;
+      }
+    },
+    actions: {
+      goPrev: function() {
+        var month, year;
+        month = parseInt(this.get('month')) - 1;
+        year = parseInt(this.get('year'));
+        if (month === 0) {
+          month = 12;
+          year -= 1;
+        }
+        this.setProperties({
+          'year': year,
+          'month': month
+        });
+        return this.transitionToRoute('weather', year, this.strPad(month));
+      },
+      goNext: function() {
+        var month, year;
+        month = parseInt(this.get('month')) + 1;
+        year = parseInt(this.get('year'));
+        if (month === 13) {
+          month = 1;
+          year += 1;
+        }
+        this.setProperties({
+          'year': year,
+          'month': month
+        });
+        return this.transitionToRoute('weather', year, this.strPad(month));
+      }
+    }
   });
 
   App.Router.map(function() {

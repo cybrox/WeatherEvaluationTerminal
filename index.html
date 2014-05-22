@@ -29,14 +29,7 @@
 			-->
 		</header>
 		<section id="content">
-			<h1 id="monthselect">
-				<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; Vorheriger</button>
-				Januar &bull; 2014
-				<button {{action 'goPrev'}} class="btn btn-primary pull-right">N&auml;chster &#xbb;</button>
-			</h1>
-			<section id="contentInner">
-				{{outlet}}
-			</section>
+			{{outlet}}
 		</section>
 		<footer>
 			<span id="copyright">
@@ -48,48 +41,42 @@
 
 
 
-	<!-- Page: "index" "/" - ->
+	<!-- Page: "index" "/" -->
 	<script type="text/x-handlebars" id="index">
 		Loading recent weather data...
 	</script>
 
 
-	<!-- Page: "weather" "/weather/..." - ->
+	<!-- Page: "weather" "/weather/..." -->
 	<script type="text/x-handlebars" id="weather">
-		<section id="monthview">
-			<h2>{{lang 'content.weather.headline'}} {{currentMonth}}</h2>
-			<div class="doublebox">
-				<div class="doublemain col-md-8" id="monthdata1">
-					<canvas id="monthGraphBigOne" width="100%" height="100%"></canvas>
+		<h1 id="monthselect">
+			<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; Vorheriger</button>
+			{{currentMonth}}
+			<button {{action 'goNext'}} class="btn btn-primary pull-right">N&auml;chster &#xbb;</button>
+		</h1>
+		<section id="contentInner">
+			<section id="monthview">
+				<div class="doublebox">
+					<div class="doublemain col-md-8" id="monthdata1">
+						<canvas id="monthGraphBigOne" width="100%" height="100%"></canvas>
+					</div>
+					<div class="doubleside col-md-4" id="monthdata2">
+						<canvas id="monthGraphSmall" width="100%" height="100%"></canvas>
+					</div>
 				</div>
-				<div class="doubleside col-md-4" id="monthdata2">
-					<canvas id="monthGraphSmall" width="100%" height="100%"></canvas>
+				<div class="doublebox">
+					<div class="doublemain col-md-8" id="monthdata3">
+						<canvas id="monthGraphBigTwo" width="100%" height="100%"></canvas>
+					</div>
+					<div class="doubleside col-md-4" id="monthdata4">
+					</div>
 				</div>
-			</div>
-			<div class="doublebox">
-				<div class="doublemain col-md-8" id="monthdata3">
-					<canvas id="monthGraphBigTwo" width="100%" height="100%"></canvas>
-				</div>
-				<div class="doubleside col-md-4" id="monthdata4">
-					<h4>{{lang 'content.weather.title.average'}}</h4>
-				</div>
-			</div>
-		</section>
-		<!--
-		<section id="daydivider">
-			meow
-		</section>
-		- ->
-		<section id="dayview">
-			<section id="daypick">
-			</section>
-			<section id="daydata">
 			</section>
 		</section>
 	</script>
 
 
-	<!-- Page: "notifications" "/" -->
+	<!-- Page: "notifications" "/" - ->
 	<script type="text/x-handlebars" id="notifications">
 		<h2>
 			{{lang 'content.warnings.headline'}}
