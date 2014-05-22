@@ -1,18 +1,24 @@
 App.WeatherController = Ember.Controller.extend
   
-  year: 0
-
-  blip: (->
-    console.log @get 'year'
-  ).property('year')
+  monthList: [
+    'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli',
+    'August', 'September', 'Oktober', 'November', 'Dezember'
+  ]
 
   currentMonth: (->
-    monthList = [
-      'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli',
-      'August', 'September', 'Oktober', 'November', 'Dezember'
-    ]
-    monthList[(parseInt(@get('month'))-1)]+" &bull; "+@get('year')
+    monthList = @get('monthList')
+    monthList[(parseInt(@get('month'))-1)]+" "+@get('year')
   ).property('year', 'month')
+
+  prevMonth: (->
+    monthList = @get('monthList')
+    monthList[(parseInt(@get('month'))-1)]
+  ).property('month')
+
+  nextMonth: (->
+    monthList = @get('monthList')
+    monthList[(parseInt(@get('month'))+1)]
+  ).property('month')
 
   strPad: (num) ->
     if parseInt(num) < 10 then "0"+num else num

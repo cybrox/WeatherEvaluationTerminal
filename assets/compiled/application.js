@@ -6,18 +6,65 @@
     LOG_TRANSITIONS: true
   });
 
+  App.GraphCanvasComponent = Ember.Component.extend({
+    tagName: 'canvas',
+    canvas: null,
+    context: null,
+    didInsertElement: function() {
+      var canvas, context, jqcanv;
+      canvas = this.get('element');
+      jqcanv = $(canvas);
+      context = canvas.getContext('2d');
+      this.setProperties({
+        'canvas': canvas,
+        'context': context
+      });
+      canvas.width = jqcanv.parent().width();
+      canvas.height = jqcanv.parent().height();
+      return this.initializeGraph();
+    },
+    initializeGraph: function() {
+      if (this.get('gtype') !== void 0) {
+        if (this.get('gtype') === 'line') {
+          this.set('chart', new Chart(this.get('context')).Line(this.get('gdata'), this.get('goptions')));
+        }
+        if (this.get('gtype') === 'radar') {
+          return this.set('chart', new Chart(this.get('context')).Radar(this.get('gdata'), this.get('goptions')));
+        }
+      } else {
+        return console.log('invalid graph type specified.');
+      }
+    }
+  });
+
+  App.ApplicationController = Ember.Controller.extend({
+    newWarnings: (function() {
+      return 10;
+    }).property(),
+    hasWarnings: (function() {
+      return this.get('newWarnings') > 0;
+    }).property('newWarnings')
+  });
+
   App.NotificationsController = Ember.Controller.extend();
 
   App.WeatherController = Ember.Controller.extend({
-    year: 0,
-    blip: (function() {
-      return console.log(this.get('year'));
-    }).property('year'),
+    monthList: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
     currentMonth: (function() {
       var monthList;
-      monthList = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-      return monthList[parseInt(this.get('month')) - 1] + " &bull; " + this.get('year');
+      monthList = this.get('monthList');
+      return monthList[parseInt(this.get('month')) - 1] + " " + this.get('year');
     }).property('year', 'month'),
+    prevMonth: (function() {
+      var monthList;
+      monthList = this.get('monthList');
+      return monthList[parseInt(this.get('month')) - 1];
+    }).property('month'),
+    nextMonth: (function() {
+      var monthList;
+      monthList = this.get('monthList');
+      return monthList[parseInt(this.get('month')) + 1];
+    }).property('month'),
     strPad: function(num) {
       if (parseInt(num) < 10) {
         return "0" + num;
