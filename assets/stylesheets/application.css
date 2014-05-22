@@ -40,7 +40,7 @@ header {
 	color: #000080;
 	font-size: 5em;
 	font-weight: bold;
-	text-shadow: 0 -2px 2px #4F94CD;
+	/*text-shadow: 0 -2px 2px #4F94CD;*/
 }
 
 #notifications { margin-top: 30px; }
@@ -50,11 +50,12 @@ header {
 	font-weight: normal;
 }
 
-#monthpick, #monthpick button { color: #fff; }
-#monthpick {
-	text-align: right;
-	margin-top: -60px;
-	font-size: 1.2em;
+#monthselect {
+	margin: 0 0 20px 0;
+	padding: 10px 10%;
+	text-align: center;
+	font-size: 2.1em;
+	background: rgba(255,255,255,0.9);
 }
 
 /************************************************
@@ -66,7 +67,7 @@ header {
 	padding: 0;
 	width: 100%;
 	min-height: 800px;
-	background: rgba(255,255,255,0.95);
+	background: rgba(255,255,255,0.85);
 }
 
 #daydivider {
@@ -98,7 +99,7 @@ canvas { border: 1px solid #ddd; }
 */
 footer {
 	width: 100%;
-	background: #fff;
+	background: rgba(255,255,255,0.9);
 }
 
 #copyright {

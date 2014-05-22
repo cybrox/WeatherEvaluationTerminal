@@ -17,29 +17,34 @@
 </head>
 <body>
 
-	<!-- Application template - ->
-	<script type="text/x-handlebars">-->
+	<!-- Application template -->
+	<script type="text/x-handlebars">
 		<header class="clearfix">
-			<span id="pagename">Wetterstation</span>
-			<div class="pull-right">
-			  <div class="btn btn-primary" id="notifications">
-			    <img src="assets/images/notifications.png" />
-			    <strong>00</strong>
-			  </div>
-			</div>
+			<!--
+			<h1 id="pagename">Wetterstation
+			  {{#link-to 'notifications' id="notifications" class="pull-right btn btn-primary"}}
+			    <strong>00 Warnungen</strong>
+			  {{/link-to}}
+			</h1>
+			-->
 		</header>
 		<section id="content">
+			<h1 id="monthselect">
+				<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; Vorheriger</button>
+				Januar &bull; 2014
+				<button {{action 'goPrev'}} class="btn btn-primary pull-right">N&auml;chster &#xbb;</button>
+			</h1>
 			<section id="contentInner">
 				{{outlet}}
 			</section>
 		</section>
 		<footer>
 			<span id="copyright">
-				Wetterstation 'Weather evaluation terminal', Entwicklungsprojekt EN11a. •
+				Wetterstation 'Weather evaluation terminal', Entwicklungsprojekt EN11a. &bull;
 				Webinterface written and copyrighted 2014+ by Sven Marc 'cybrox' Gehring.
 			</span>
 		</footer>
-	<!--</script>-->
+	</script>
 
 
 
@@ -84,8 +89,8 @@
 	</script>
 
 
-	<!-- Page: "warnings" "/" - ->
-	<script type="text/x-handlebars" id="warnings">
+	<!-- Page: "notifications" "/" -->
+	<script type="text/x-handlebars" id="notifications">
 		<h2>
 			{{lang 'content.warnings.headline'}}
 			{{#link-to 'index' id="warningsBack" class="btn btn-primary"}}{{lang 'content.warnings.back'}}{{/link-to}}
@@ -112,12 +117,11 @@
 	</script>
 
 
+-->
+	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/handlebars.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/ember.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/chart.min.js"></script>
 	<script type="text/javascript" src="assets/compiled/application.js"></script>
--->
-	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/vendor/bootstrap.min.js"></script>
 </body>
 </html>
