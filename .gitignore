@@ -7,3 +7,4 @@ data/*.json
 
 # Compiled dev app (for now)
 assets/compiled/application.js
+assets/compiled/application.js
