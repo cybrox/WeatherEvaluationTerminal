@@ -56,19 +56,51 @@
 		</h1>
 		<section id="contentInner">
 			<section id="monthview">
-				<div class="doublebox">
-					<div class="doublemain col-md-8" id="monthdata1">
-						{{graph-canvas type='Line' range='day' data=controller.dataset options=''}}
+				<div class="doublewrapper">
+					<div class="doublebox col-md-8">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						  	<span class="label label-primary show-blue">°C</span> Temperatur 
+						  	<span class="label label-primary show-blue">mm/m3</span> Regenmenge
+						  </div>
+						  <div class="panel-body">
+								{{graph-canvas type='Line' range='month' data=controller.dataset1 options=view.lineOptions}}
+						  </div>
+						</div>
 					</div>
-					<div class="doubleside col-md-4" id="monthdata2">
-						<canvas id="monthGraphSmall" width="100%" height="100%"></canvas>
+					<div class="doublebox col-md-4">
+						<div class="panel panel-default">
+						  <div class="panel-heading"><span class="label label-default">Stunden</span> Windrichtung (Norden oben)</div>
+						  <div class="panel-body">
+								{{graph-canvas type='PolarArea' range='dir' data=controller.dataset2 options=view.areaOptions}}
+						  </div>
+						</div>
 					</div>
 				</div>
-				<div class="doublebox">
-					<div class="doublemain col-md-8" id="monthdata3">
-						<canvas id="monthGraphBigTwo" width="100%" height="100%"></canvas>
+				<div class="doublewrapper">
+					<div class="doublebox col-md-8">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						  	<span class="label label-primary show-blue">km/h</span> Windstärke 
+						  	<span class="label label-primary show-blue">%</span> Luftfeuchtigkeit
+						  </div>
+						  <div class="panel-body">
+								{{graph-canvas type='Line' range='month' data=controller.dataset1 options=view.lineOptions}}
+						  </div>
+						</div>
 					</div>
-					<div class="doubleside col-md-4" id="monthdata4">
+					<div class="doublebox col-md-4">
+						<div class="panel panel-default">
+						  <div class="panel-heading">Durchschnttswerte</div>
+						  <div class="panel-body nopadd">
+								<table class="table table-striped">
+									<tr><td>Temperatur</td><td>0°C</td></tr>
+									<tr><td>Regenmenge</td><td>1mm/m3</td></tr>
+									<tr><td>Windstärke</td><td>40km/h</td></tr>
+									<tr><td>Luftfeuchtigkeit</td><td>0% (TBZ)</td></tr>
+								</table>
+						  </div>
+						</div>
 					</div>
 				</div>
 			</section>

@@ -79,20 +79,18 @@ header {
 
 #dayview { display: none; }
 
-canvas { border: 1px solid #ddd; }
-
 
 
 /************************************************
 ** Frontend Framework parts
 */
 .break { clear: both; }
+.nopadd { padding: 0; }
+.nopadd table { margin: 0; }
+.nopadd table tr:first-of-type td { border-top: none; }
 
-/* For framework layout tests */
-.doublebox div {
-	/*border: 1px dotted #000;*/
-}
-
+.doublewrapper .doublebox:first-of-type { padding-left : 0; }
+.doublewrapper .doublebox:last-of-type { padding-right : 0; }
 
 
 /************************************************

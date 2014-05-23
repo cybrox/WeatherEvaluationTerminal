@@ -5,7 +5,9 @@ App.WeatherController = Ember.Controller.extend
     'August', 'September', 'Oktober', 'November', 'Dezember'
   ]
 
-  dataset: [
+
+
+  dataset1: [
     {
       fillColor : "rgba(220,220,220,0.5)",
       strokeColor : "rgba(220,220,220,1)",
@@ -21,7 +23,36 @@ App.WeatherController = Ember.Controller.extend
       data : [28,48,40,19,96,27,100]
     }
   ]
+  
+  dataset2: [
+    {
+      value : 30,
+      color: "#D97041"
+    },
+    {
+      value : 90,
+      color: "#C7604C"
+    },
+    {
+      value : 24,
+      color: "#21323D"
+    },
+    {
+      value : 58,
+      color: "#9D9B7F"
+    },
+    {
+      value : 82,
+      color: "#7D4F6D"
+    },
+    {
+      value : 8,
+      color: "#584A5E"
+    }
+  ]
 
+
+  # Month-picker methods ------------------------------------------------------
   currentMonth: (->
     monthList = @get('monthList')
     monthList[(parseInt(@get('month'))-1)]+" "+@get('year')

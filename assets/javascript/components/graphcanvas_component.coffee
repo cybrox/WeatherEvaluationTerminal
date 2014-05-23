@@ -6,22 +6,19 @@ App.GraphCanvasComponent = Ember.Component.extend
     jqcanv = $(canvas)
     context = canvas.getContext('2d')
     canvas.width = jqcanv.parent().width()
-    canvas.height = jqcanv.parent().height()
+    canvas.height = 200#jqcanv.parent().height()
 
-    data = {
-      labels: @generateLables()
-      datasets: @get('data')
-    }
-
-    chart = new Chart(context)[@get('type')](data)
+    options = {}
+    options = @get('options') if @get('options') != undefined
+    data = {labels: @generateLables(), datasets: @get('data')}
+    data = @get('data') if @get('type') == 'PolarArea'
+    chart = new Chart(context)[@get('type')](data, options)
 
   generateLables: ->
     lables = []
     if @get('range') == 'month'
-      lables = [
-        'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli',
-        'August', 'September', 'Oktober', 'November', 'Dezember'
-      ]
+      for m in [0..31]
+        lables.push @stp(m)
 
     if @get('range') == 'day'
       for h in [0...24]
