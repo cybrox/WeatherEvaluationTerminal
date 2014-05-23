@@ -8,32 +8,42 @@
 
   App.GraphCanvasComponent = Ember.Component.extend({
     tagName: 'canvas',
-    canvas: null,
-    context: null,
     didInsertElement: function() {
-      var canvas, context, jqcanv;
+      var canvas, chart, context, data, jqcanv;
       canvas = this.get('element');
       jqcanv = $(canvas);
       context = canvas.getContext('2d');
-      this.setProperties({
-        'canvas': canvas,
-        'context': context
-      });
       canvas.width = jqcanv.parent().width();
       canvas.height = jqcanv.parent().height();
-      return this.initializeGraph();
+      data = {
+        labels: this.generateLables(),
+        datasets: this.get('data')
+      };
+      return chart = new Chart(context)[this.get('type')](data);
     },
-    initializeGraph: function() {
-      if (this.get('gtype') !== void 0) {
-        if (this.get('gtype') === 'line') {
-          this.set('chart', new Chart(this.get('context')).Line(this.get('gdata'), this.get('goptions')));
-        }
-        if (this.get('gtype') === 'radar') {
-          return this.set('chart', new Chart(this.get('context')).Radar(this.get('gdata'), this.get('goptions')));
-        }
-      } else {
-        return console.log('invalid graph type specified.');
+    generateLables: function() {
+      var h, i, lables, m, _i, _j, _k, _ref;
+      lables = [];
+      if (this.get('range') === 'month') {
+        lables = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
       }
+      if (this.get('range') === 'day') {
+        for (h = _i = 0; _i < 24; h = ++_i) {
+          for (m = _j = 0; _j < 60; m = _j += 15) {
+            lables.push(this.stp(h) + ':' + this.stp(m));
+          }
+        }
+        for (i = _k = 0, _ref = lables.length; _k <= _ref; i = _k += 2) {
+          lables[i - 1] = "";
+        }
+      }
+      return lables;
+    },
+    stp: function(num) {
+      if (parseInt(num) < 10) {
+        num = "0" + num;
+      }
+      return num;
     }
   });
 
@@ -50,6 +60,21 @@
 
   App.WeatherController = Ember.Controller.extend({
     monthList: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+    dataset: [
+      {
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [65, 59, 90, 81, 56, 55, 40]
+      }, {
+        fillColor: "rgba(151,187,205,0.5)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        data: [28, 48, 40, 19, 96, 27, 100]
+      }
+    ],
     currentMonth: (function() {
       var monthList;
       monthList = this.get('monthList');

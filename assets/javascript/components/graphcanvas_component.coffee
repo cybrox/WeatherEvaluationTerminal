@@ -1,24 +1,39 @@
 App.GraphCanvasComponent = Ember.Component.extend
   tagName: 'canvas'
 
-  canvas: null
-  context: null
-
   didInsertElement: ->
     canvas = @get('element')
     jqcanv = $(canvas)
     context = canvas.getContext('2d')
-
-    @setProperties('canvas': canvas, 'context': context);
-
     canvas.width = jqcanv.parent().width()
     canvas.height = jqcanv.parent().height()
 
-    @initializeGraph()
+    data = {
+      labels: @generateLables()
+      datasets: @get('data')
+    }
 
-  initializeGraph: ->
-    if @get('gtype') != undefined
-      if @get('gtype') == 'line' then  @set('chart', new Chart(@get('context')).Line(@get('gdata'), @get('goptions')))
-      if @get('gtype') == 'radar' then @set('chart', new Chart(@get('context')).Radar(@get('gdata'), @get('goptions')))
-    else
-      console.log('invalid graph type specified.')
+    chart = new Chart(context)[@get('type')](data)
+
+  generateLables: ->
+    lables = []
+    if @get('range') == 'month'
+      lables = [
+        'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli',
+        'August', 'September', 'Oktober', 'November', 'Dezember'
+      ]
+
+    if @get('range') == 'day'
+      for h in [0...24]
+        for m in [0...60] by 15
+          lables.push @stp(h)+':'+@stp(m)
+
+      # Remove some lables for space
+      for i in [0..lables.length] by 2
+        lables[(i-1)] = "" 
+
+    lables
+
+  stp: (num) ->
+    num = "0"+num if parseInt(num) < 10
+    num
