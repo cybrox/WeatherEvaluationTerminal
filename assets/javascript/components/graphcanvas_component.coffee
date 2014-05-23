@@ -17,17 +17,19 @@ App.GraphCanvasComponent = Ember.Component.extend
   generateLables: ->
     lables = []
     if @get('range') == 'month'
-      for m in [0..31]
+      for m in [1..31]
         lables.push @stp(m)
 
-    if @get('range') == 'day'
+    else if @get('range') == 'day'
       for h in [0...24]
         for m in [0...60] by 15
           lables.push @stp(h)+':'+@stp(m)
 
       # Remove some lables for space
-      for i in [0..lables.length] by 2
-        lables[(i-1)] = "" 
+      lables[(i-1)] = "" for i in [0..lables.length] by 2
+        
+    else if @get('range') == 'direction'
+      lables = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW']
 
     lables
 
