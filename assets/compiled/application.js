@@ -32,11 +32,10 @@
       var h, i, lables, m, _i, _j, _k, _l, _ref;
       lables = [];
       if (this.get('range') === 'month') {
-        for (m = _i = 0; _i <= 31; m = ++_i) {
+        for (m = _i = 1; _i <= 31; m = ++_i) {
           lables.push(this.stp(m));
         }
-      }
-      if (this.get('range') === 'day') {
+      } else if (this.get('range') === 'day') {
         for (h = _j = 0; _j < 24; h = ++_j) {
           for (m = _k = 0; _k < 60; m = _k += 15) {
             lables.push(this.stp(h) + ':' + this.stp(m));
@@ -45,7 +44,10 @@
         for (i = _l = 0, _ref = lables.length; _l <= _ref; i = _l += 2) {
           lables[i - 1] = "";
         }
+      } else if (this.get('range') === 'direction') {
+        lables = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'];
       }
+      console.log(lables);
       return lables;
     },
     stp: function(num) {
@@ -86,23 +88,11 @@
     ],
     dataset2: [
       {
-        value: 30,
-        color: "#D97041"
-      }, {
-        value: 90,
-        color: "#C7604C"
-      }, {
-        value: 24,
-        color: "#21323D"
-      }, {
-        value: 58,
-        color: "#9D9B7F"
-      }, {
-        value: 82,
-        color: "#7D4F6D"
-      }, {
-        value: 8,
-        color: "#584A5E"
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [65, 59, 90, 81, 56, 55, 40, 10]
       }
     ],
     currentMonth: (function() {
