@@ -56,14 +56,22 @@
       return monthList[parseInt(this.get('month')) - 1] + " " + this.get('year');
     }).property('year', 'month'),
     prevMonth: (function() {
-      var monthList;
+      var monthList, thisMonth;
       monthList = this.get('monthList');
-      return monthList[parseInt(this.get('month')) - 1];
+      thisMonth = parseInt(this.get('month'));
+      if (thisMonth === 1) {
+        thisMonth = 13;
+      }
+      return monthList[thisMonth - 2];
     }).property('month'),
     nextMonth: (function() {
-      var monthList;
+      var monthList, thisMonth;
       monthList = this.get('monthList');
-      return monthList[parseInt(this.get('month')) + 1];
+      thisMonth = parseInt(this.get('month'));
+      if (thisMonth === 12) {
+        thisMonth = 0;
+      }
+      return monthList[thisMonth];
     }).property('month'),
     strPad: function(num) {
       if (parseInt(num) < 10) {

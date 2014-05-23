@@ -12,12 +12,16 @@ App.WeatherController = Ember.Controller.extend
 
   prevMonth: (->
     monthList = @get('monthList')
-    monthList[(parseInt(@get('month'))-1)]
+    thisMonth = parseInt(@get('month'))
+    thisMonth = 13 if thisMonth == 1
+    monthList[(thisMonth-2)]
   ).property('month')
 
   nextMonth: (->
     monthList = @get('monthList')
-    monthList[(parseInt(@get('month'))+1)]
+    thisMonth = parseInt(@get('month'))
+    thisMonth = 0 if thisMonth == 12
+    monthList[thisMonth]
   ).property('month')
 
   strPad: (num) ->

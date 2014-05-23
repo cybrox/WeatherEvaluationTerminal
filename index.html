@@ -50,9 +50,9 @@
 	<!-- Page: "weather" "/weather/..." -->
 	<script type="text/x-handlebars" id="weather">
 		<h1 id="monthselect">
-			<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; Vorheriger ({{prevMonth}})</button>
+			<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; {{prevMonth}}</button>
 			Wetterdaten Monatsansicht &bull; {{currentMonth}}
-			<button {{action 'goNext'}} class="btn btn-primary pull-right">Nächster ({{nextMonth}}) &#xbb;</button>
+			<button {{action 'goNext'}} class="btn btn-primary pull-right">{{nextMonth}} &#xbb;</button>
 		</h1>
 		<section id="contentInner">
 			<section id="monthview">
