@@ -108,35 +108,19 @@
 	</script>
 
 
-	<!-- Page: "notifications" "/" - ->
+	<!-- Page: "notifications" "/" -->
 	<script type="text/x-handlebars" id="notifications">
-		<h2>
-			{{lang 'content.warnings.headline'}}
-			{{#link-to 'index' id="warningsBack" class="btn btn-primary"}}{{lang 'content.warnings.back'}}{{/link-to}}
-		</h2>
-		<table class="table">
-			{{#each warning in data.warnings}}
-				<tr>
-					<td><span {{bind-attr class=":btn warning.type"}}>!</span></td>
-					<td class="warningMessage">
-						<span class="warningTime">{{time warning.time}}</span>
-						<span>{{warn warning.message}}</span>
-					</td>
-				</td>
-			{{/each}}
-		</table>
+		<h1 id="monthselect">Systemmeldungen</h1>
+		<section id="contentInner">
+			{{#link-to 'index' class="btn btn-primary"}}&#xab; Zurück zur Monatsansicht{{/link-to}}
+			<table class="table table-striped">
+				
+			</table>
+			...
+		</section>
 	</script>
 
 
-	<!-- Page: "nodata" "/nodata" - ->
-	<script type="text/x-handlebars" id="nodata">
-		{{#link-to 'index' class="col-md-12 btn btn-danger"}}
-			{{lang 'content.warnings.nodata'}}<br /><br />{{lang 'content.warnings.back'}}
-		{{/link-to}}
-	</script>
-
-
--->
 	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/handlebars.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/ember.min.js"></script>

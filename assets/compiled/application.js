@@ -47,7 +47,6 @@
       } else if (this.get('range') === 'direction') {
         lables = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'];
       }
-      console.log(lables);
       return lables;
     },
     stp: function(num) {
