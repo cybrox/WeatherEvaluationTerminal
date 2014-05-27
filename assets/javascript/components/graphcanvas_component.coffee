@@ -12,6 +12,7 @@ App.GraphCanvasComponent = Ember.Component.extend
     options = @get('options') if @get('options') != undefined
     data = {labels: @generateLables(), datasets: @get('data')}
     data = @get('data') if @get('type') == 'PolarArea'
+    console.log(data)
     chart = new Chart(context)[@get('type')](data, options)
 
   generateLables: ->

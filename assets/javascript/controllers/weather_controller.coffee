@@ -34,6 +34,62 @@ App.WeatherController = Ember.Controller.extend
     }
   ]
 
+  # Value for month overview graphs -------------------------------------------
+  initializeData: (->
+    dataset = @get('content')
+    dataday = {}
+    daylist = {}
+    for data in dataset.data
+      dataday[data.day] = new Array if dataday[data.day] == undefined
+      dataday[data.day].push(data)
+
+    for num, day of dataday
+      hm = 0; rv = 0; tm = 0; wd = 0; ws = 0; 
+      for entry in day
+        hm += entry.humidity
+        rv += entry.rain_volume
+        tm += entry.temperature
+        wd += entry.wind_direction
+        ws += entry.wind_speed
+
+      daylist[num] =
+        humidity: hm/day.length
+        rain_volume: rv/day.length
+        temperature: tm/day.length
+        wind_direction: wd/day.length
+        wind_speed: ws/day.length
+
+    @set('datasetAll', daylist)
+    @generateDatasets()
+  ).observes('content')
+
+  generateDatasets: ->
+    dataOne = []; dataTwo = [];
+    for num,day of @get('datasetAll')
+      dataOne.push(day.temperature)
+      dataTwo.push(day.rain_volume)
+
+    graphdata = [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(0,0,0,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#000",
+        data : dataOne
+      },
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : dataTwo
+      }
+    ]
+    @set('datasetOne', graphdata)
+    @set('datasetOne', [])
+    @set('datasetOne', graphdata)
+
+
 
   # Month-picker methods ------------------------------------------------------
   currentMonth: (->

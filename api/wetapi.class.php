@@ -81,14 +81,15 @@
     }
 
     protected function create_weatherdata($time=0, $temp=50, $wdir=-1, $wspd=-1, $rain=-1, $humd=-1){
+      if(intval($time) < 100) $this->publish(false, 'invalid timestamp value');
+
       $y = date('Y', $time);
       $m = date('m', $time);
       $d = date('d', $time); 
       $month = 'wet'.$y.'-'.$m;
-      if(func_num_args() != 6) $this->publish(false, 'not enough arguments given');
+      if(func_num_args() != 6) $this->publish(false, 'not enough [or] too many arguments given');
       if(!in_array($month, $this->cdb->tables())) $this->cdb->create($month);
 
-      if($time == 0)                $this->publish(false, 'invalid timestamp value');
       if($temp < -20 || $temp > 43) $this->publish(false, 'invalid temperature value');
       if($wdir < 0 || $wdir > 360)  $this->publish(false, 'invalid wind direction value');
       if($wspd < 0 || $wspd > 100)  $this->publish(false, 'invalid wind speed value');

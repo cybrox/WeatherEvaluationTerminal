@@ -26,6 +26,7 @@
       if (this.get('type') === 'PolarArea') {
         data = this.get('data');
       }
+      console.log(data);
       return chart = new Chart(context)[this.get('type')](data, options);
     },
     generateLables: function() {
@@ -94,6 +95,74 @@
         data: [65, 59, 90, 81, 56, 55, 40, 10]
       }
     ],
+    initializeData: (function() {
+      var data, dataday, dataset, day, daylist, entry, hm, num, rv, tm, wd, ws, _i, _j, _len, _len1, _ref;
+      dataset = this.get('content');
+      dataday = {};
+      daylist = {};
+      _ref = dataset.data;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        data = _ref[_i];
+        if (dataday[data.day] === void 0) {
+          dataday[data.day] = new Array;
+        }
+        dataday[data.day].push(data);
+      }
+      for (num in dataday) {
+        day = dataday[num];
+        hm = 0;
+        rv = 0;
+        tm = 0;
+        wd = 0;
+        ws = 0;
+        for (_j = 0, _len1 = day.length; _j < _len1; _j++) {
+          entry = day[_j];
+          hm += entry.humidity;
+          rv += entry.rain_volume;
+          tm += entry.temperature;
+          wd += entry.wind_direction;
+          ws += entry.wind_speed;
+        }
+        daylist[num] = {
+          humidity: hm / day.length,
+          rain_volume: rv / day.length,
+          temperature: tm / day.length,
+          wind_direction: wd / day.length,
+          wind_speed: ws / day.length
+        };
+      }
+      this.set('datasetAll', daylist);
+      return this.generateDatasets();
+    }).observes('content'),
+    generateDatasets: function() {
+      var dataOne, dataTwo, day, graphdata, num, _ref;
+      dataOne = [];
+      dataTwo = [];
+      _ref = this.get('datasetAll');
+      for (num in _ref) {
+        day = _ref[num];
+        dataOne.push(day.temperature);
+        dataTwo.push(day.rain_volume);
+      }
+      graphdata = [
+        {
+          fillColor: "rgba(220,220,220,0.5)",
+          strokeColor: "rgba(0,0,0,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#000",
+          data: dataOne
+        }, {
+          fillColor: "rgba(220,220,220,0.5)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          data: dataTwo
+        }
+      ];
+      this.set('datasetOne', graphdata);
+      this.set('datasetOne', []);
+      return this.set('datasetOne', graphdata);
+    },
     currentMonth: (function() {
       var monthList;
       monthList = this.get('monthList');
@@ -186,7 +255,16 @@
   App.WeatherRoute = Ember.Route.extend({
     model: function(params) {
       this.set('year', params.year);
-      return this.set('month', params.month);
+      this.set('month', params.month);
+      return $.getJSON("api/get/weatherdata/" + params.year + "-" + params.month, (function(_this) {
+        return function(payload) {
+          if (payload.success) {
+            return payload;
+          } else {
+            return _this.transitionToRoute('notfound');
+          }
+        };
+      })(this));
     },
     setupController: function(controller, model) {
       this._super(controller, model);
