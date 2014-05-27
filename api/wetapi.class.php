@@ -19,7 +19,7 @@
 
     public function _call($reqFunc, $reqArgs){
       if(method_exists('WetApi', $reqFunc)) call_user_func_array(array($this, $reqFunc), $reqArgs);
-      else $this->publish(false, 'invalid chat action '.$reqFunc);
+      else $this->publish(false, 'invalid api action '.$reqFunc);
     }
 
     /**
