@@ -64,30 +64,46 @@ App.WeatherController = Ember.Controller.extend
   ).observes('content')
 
   generateDatasets: ->
-    dataOne = []; dataTwo = [];
+    dataTm = []; dataRv = []; dataWs = [];dataHm = []; dataWd = [];
+    console.log @get('datasetAll')
     for num,day of @get('datasetAll')
-      dataOne.push(day.temperature)
-      dataTwo.push(day.rain_volume)
+      dataTm.push(day.temperature)
+      dataRv.push(day.rain_volume)
+      dataWs.push(day.wind_speed)
+      dataHm.push(day.humidity)
+      dataWd.push(day.wind_direction)
 
-    graphdata = [
-      {
-        fillColor : "rgba(220,220,220,0.5)",
-        strokeColor : "rgba(0,0,0,1)",
-        pointColor : "rgba(220,220,220,1)",
-        pointStrokeColor : "#000",
-        data : dataOne
-      },
-      {
-        fillColor : "rgba(220,220,220,0.5)",
-        strokeColor : "rgba(220,220,220,1)",
-        pointColor : "rgba(220,220,220,1)",
-        pointStrokeColor : "#fff",
-        data : dataTwo
-      }
-    ]
-    @set('datasetOne', graphdata)
-    @set('datasetOne', [])
-    @set('datasetOne', graphdata)
+    graphdataOne = [{
+        strokeColor : "rgba(28,134,238,1)",
+        pointColor : "rgba(28,134,238,1)",
+        data : dataTm
+      },{
+        strokeColor : "rgba(71,60,139,1)",
+        pointColor : "rgba(71,60,139,1)",
+        data : dataRv
+    }]
+
+    graphdataTwo = [{
+        strokeColor : "rgba(28,134,238,1)",
+        pointColor : "rgba(28,134,238,1)",
+        data : dataWs
+      },{
+        strokeColor : "rgba(71,60,139,1)",
+        pointColor : "rgba(71,60,139,1)",
+        data : dataHm
+    }]
+
+    graphdataDir = [{
+      fillColor : "rgba(220,220,220,0.5)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      data : dataWd
+    }]
+
+    @set('datasetOne', graphdataOne)
+    @set('datasetTwo', graphdataTwo)
+    @set('datasetDir', graphdataDir)
 
 
 

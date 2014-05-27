@@ -135,33 +135,56 @@
       return this.generateDatasets();
     }).observes('content'),
     generateDatasets: function() {
-      var dataOne, dataTwo, day, graphdata, num, _ref;
-      dataOne = [];
-      dataTwo = [];
+      var dataHm, dataRv, dataTm, dataWd, dataWs, day, graphdataDir, graphdataOne, graphdataTwo, num, _ref;
+      dataTm = [];
+      dataRv = [];
+      dataWs = [];
+      dataHm = [];
+      dataWd = [];
+      console.log(this.get('datasetAll'));
       _ref = this.get('datasetAll');
       for (num in _ref) {
         day = _ref[num];
-        dataOne.push(day.temperature);
-        dataTwo.push(day.rain_volume);
+        dataTm.push(day.temperature);
+        dataRv.push(day.rain_volume);
+        dataWs.push(day.wind_speed);
+        dataHm.push(day.humidity);
+        dataWd.push(day.wind_direction);
       }
-      graphdata = [
+      graphdataOne = [
         {
-          fillColor: "rgba(220,220,220,0.5)",
-          strokeColor: "rgba(0,0,0,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#000",
-          data: dataOne
+          strokeColor: "rgba(28,134,238,1)",
+          pointColor: "rgba(28,134,238,1)",
+          data: dataTm
         }, {
+          strokeColor: "rgba(71,60,139,1)",
+          pointColor: "rgba(71,60,139,1)",
+          data: dataRv
+        }
+      ];
+      graphdataTwo = [
+        {
+          strokeColor: "rgba(28,134,238,1)",
+          pointColor: "rgba(28,134,238,1)",
+          data: dataWs
+        }, {
+          strokeColor: "rgba(71,60,139,1)",
+          pointColor: "rgba(71,60,139,1)",
+          data: dataHm
+        }
+      ];
+      graphdataDir = [
+        {
           fillColor: "rgba(220,220,220,0.5)",
           strokeColor: "rgba(220,220,220,1)",
           pointColor: "rgba(220,220,220,1)",
           pointStrokeColor: "#fff",
-          data: dataTwo
+          data: dataWd
         }
       ];
-      this.set('datasetOne', graphdata);
-      this.set('datasetOne', []);
-      return this.set('datasetOne', graphdata);
+      this.set('datasetOne', graphdataOne);
+      this.set('datasetTwo', graphdataTwo);
+      return this.set('datasetDir', graphdataDir);
     },
     currentMonth: (function() {
       var monthList;
