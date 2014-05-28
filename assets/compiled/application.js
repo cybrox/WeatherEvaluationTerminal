@@ -179,6 +179,10 @@
         avgHm += day.humidity;
       }
       days = dataTm.length;
+      this.set('avgTm', (avgTm / days).toFixed(2));
+      this.set('avgRv', (avgRv / days).toFixed(2));
+      this.set('avgWs', (avgWs / days).toFixed(2));
+      this.set('avgHm', (avgHm / days).toFixed(2));
       graphdataOne = [
         {
           strokeColor: "rgba(28,134,238,1)",
@@ -210,19 +214,9 @@
           data: dataWd
         }
       ];
-      return this.setProperties({
-        datasetMonth: {
-          one: graphdataOne,
-          two: graphdataTwo,
-          dir: graphdataDir
-        },
-        average: {
-          tm: (avgTm / days).toFixed(2),
-          rv: (avgRv / days).toFixed(2),
-          ws: (avgWs / days).toFixed(2),
-          hm: (avgHm / days).toFixed(2)
-        }
-      });
+      this.set('datasetOne', graphdataOne);
+      this.set('datasetTwo', graphdataTwo);
+      return this.set('datasetDir', graphdataDir);
     },
     currentMonth: (function() {
       var monthList;

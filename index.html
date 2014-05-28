@@ -59,7 +59,7 @@
 			{{#if noData}}
 				<p class="btn btn-danger full-size">Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.</p>
 			{{else}}
-				<section id="monthview" class="clearfix">
+				<section id="monthview">
 					<div class="doublewrapper">
 						<div class="doublebox col-md-8">
 							<div class="panel panel-default">
@@ -68,7 +68,7 @@
 							  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
 							  </div>
 							  <div class="panel-body">
-									{{graph-canvas type='Line' range='month' data=datasetMonth.one options=view.lineOptions}}
+									{{graph-canvas type='Line' range='month' data=controller.datasetOne options=view.lineOptions}}
 							  </div>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 							<div class="panel panel-default">
 							  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
 							  <div class="panel-body nopadd">
-									{{graph-canvas type='Radar' range='direction' data=datasetMonth.dir options=view.areaOptions}}
+									{{graph-canvas type='Radar' range='direction' data=controller.datasetDir options=view.areaOptions}}
 							  </div>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
 							  </div>
 							  <div class="panel-body">
-									{{graph-canvas type='Line' range='month' data=datasetMonth.two options=view.lineOptions}}
+									{{graph-canvas type='Line' range='month' data=controller.datasetTwo options=view.lineOptions}}
 							  </div>
 							</div>
 						</div>
@@ -98,18 +98,16 @@
 							  <div class="panel-heading">Durchschnttswerte aus {{numMes}} Messungen</div>
 							  <div class="panel-body nopadd">
 									<table class="table table-striped">
-										<tr><td>Temperatur</td><td>{{average.tm}}°C</td></tr>
-										<tr><td>Regenmenge</td><td>{{average.rv}}mm/m3</td></tr>
-										<tr><td>Windstärke</td><td>{{average.ws}}km/h</td></tr>
-										<tr><td>Luftfeuchtigkeit</td><td>{{average.hm}}%</td></tr>
+										<tr><td>Temperatur</td><td>{{avgTm}}°C</td></tr>
+										<tr><td>Regenmenge</td><td>{{avgRv}}mm/m3</td></tr>
+										<tr><td>Windstärke</td><td>{{avgWs}}km/h</td></tr>
+										<tr><td>Luftfeuchtigkeit</td><td>{{avgHm}}%</td></tr>
 									</table>
 							  </div>
 							</div>
 						</div>
 					</div>
 				</section>
-				<section id="dayview" class="clearfix">
-				</div>
 			{{/if}}
 		</section>
 	</script>

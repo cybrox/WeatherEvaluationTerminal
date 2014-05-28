@@ -67,6 +67,10 @@ App.WeatherController = Ember.Controller.extend
       avgHm += day.humidity
 
     days = dataTm.length
+    @set('avgTm', (avgTm / days).toFixed(2))
+    @set('avgRv', (avgRv / days).toFixed(2))
+    @set('avgWs', (avgWs / days).toFixed(2))
+    @set('avgHm', (avgHm / days).toFixed(2))
 
     graphdataOne = [{
         strokeColor : "rgba(28,134,238,1)",
@@ -96,17 +100,9 @@ App.WeatherController = Ember.Controller.extend
       data : dataWd
     }]
 
-    @setProperties(
-      datasetMonth:
-        one: graphdataOne
-        two: graphdataTwo
-        dir: graphdataDir
-      average:
-        tm: (avgTm / days).toFixed(2)
-        rv: (avgRv / days).toFixed(2)
-        ws: (avgWs / days).toFixed(2)
-        hm: (avgHm / days).toFixed(2)
-    )
+    @set('datasetOne', graphdataOne)
+    @set('datasetTwo', graphdataTwo)
+    @set('datasetDir', graphdataDir)
 
 
 
