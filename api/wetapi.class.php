@@ -53,7 +53,7 @@
      * @param int $nid Unique ID of the respective message
      */
     protected function set_notification($nid){
-      return $this->publish(true, $this->cdb->update('notification', 'id', $nid, array('seen' => true)));
+      return $this->publish(true, $this->cdb->update('notification', 'uid', $nid, array('seen' => true)));
     }
 
     /**
@@ -64,10 +64,19 @@
     protected function create_notification($message){
       $num = $this->cdb->count('notification', '*');
       return $this->publish(true, $this->cdb->insert('notification', array(
-        'id' => ($num+1),
+        'uid' => ($num+1),
         'seen' => false,
+        'date' => date('d.m.Y, h:m', time()),
         'message' => $message
       )));
+    }
+
+    /**
+     * Special type of notification, generate a weather error
+     * notification with a german string
+     */
+    private function weather_notification($value, $actual, $min, $max){
+      $this->create_notification("Der gemessene '".$value."' Wert (".$actual.") liegt nicht im erlaubten Bereich von ".$min." - ".$max."");
     }
 
     /**
@@ -90,11 +99,11 @@
       if(func_num_args() != 6) $this->publish(false, 'not enough [or] too many arguments given');
       if(!in_array($month, $this->cdb->tables())) $this->cdb->create($month);
 
-      if($temp < -20 || $temp > 43) $this->publish(false, 'invalid temperature value');
-      if($wdir < 0 || $wdir > 360)  $this->publish(false, 'invalid wind direction value');
-      if($wspd < 0 || $wspd > 100)  $this->publish(false, 'invalid wind speed value');
-      if($rain < 0 || $rain > 15)   $this->publish(false, 'invalid rain volume value');
-      if($humd < 0 || $humd > 100)  $this->publish(false, 'invalid humidity value');
+      if($temp < -20 || $temp > 43) $this->weather_notification('Temperatur', $temp, -20, 43);
+      if($wdir < 0 || $wdir > 360)  $this->weather_notification('Windrichtung', $wdir, 0, 360);
+      if($wspd < 0 || $wspd > 100)  $this->weather_notification('Windgeschwindigkeit', $wspd, 0, 100);
+      if($rain < 0 || $rain > 15)   $this->weather_notification('Regenmenge', $rain, 0, 15);
+      if($humd < 0 || $humd > 100)  $this->weather_notification('Luftfeuchtigkeit', $humd, 0, 100);
 
       $this->cdb->insert($month, array(
         'month' => $m,
