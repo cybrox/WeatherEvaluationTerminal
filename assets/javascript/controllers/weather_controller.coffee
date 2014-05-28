@@ -128,7 +128,7 @@ App.WeatherController = Ember.Controller.extend
         month = 12
         year -= 1
 
-      @setProperties('year': year, 'month': month)
+      @setProperties('year': year, 'month': month, 'loading': true)
       @transitionToRoute('weather', year, @strPad(month))
 
     goNext: ->
@@ -139,5 +139,5 @@ App.WeatherController = Ember.Controller.extend
         month = 1
         year += 1
 
-      @setProperties('year': year, 'month': month)
+      @setProperties('year': year, 'month': month, 'loading': true)
       @transitionToRoute('weather', year, @strPad(month))

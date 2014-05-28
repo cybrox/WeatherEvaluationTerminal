@@ -100,6 +100,12 @@ header {
 .full-size { width: 100%; }
 .surr { margin: 0 20px 20px 0; }
 
+#loader {
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+}
+
 /************************************************
 ** Footer
 */

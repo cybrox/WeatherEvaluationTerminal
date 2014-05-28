@@ -55,6 +55,7 @@
 			<button {{action 'goNext'}} class="btn btn-primary pull-right">{{nextMonth}} &#xbb;</button>
 		</h1>
 		<section id="contentInner">
+			{{#if loading}} <p id="loader" class="btn btn-primary">Lade...</p> {{/if}}
 			{{#if noData}}
 				<p class="btn btn-danger full-size">Zum ausgewählten Monat sind keine Wetterdaten verfügbar.</p>
 			{{else}}

@@ -13,4 +13,5 @@ App.WeatherView = Ember.View.extend
 
   updateGraphs: (->
     @rerender()
+    @set('controller.loading', false)
   ).observes('controller.datasetOne')

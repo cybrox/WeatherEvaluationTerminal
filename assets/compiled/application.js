@@ -245,7 +245,8 @@
         }
         this.setProperties({
           'year': year,
-          'month': month
+          'month': month,
+          'loading': true
         });
         return this.transitionToRoute('weather', year, this.strPad(month));
       },
@@ -259,7 +260,8 @@
         }
         this.setProperties({
           'year': year,
-          'month': month
+          'month': month,
+          'loading': true
         });
         return this.transitionToRoute('weather', year, this.strPad(month));
       }
@@ -338,7 +340,8 @@
       animationSteps: 20
     },
     updateGraphs: (function() {
-      return this.rerender();
+      this.rerender();
+      return this.set('controller.loading', false);
     }).observes('controller.datasetOne')
   });
 
