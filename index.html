@@ -61,7 +61,7 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						  	<span class="label label-primary show-blue">°C</span> Temperatur 
-						  	<span class="label label-primary show-blue">mm/m3</span> Regenmenge
+						  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
 						  </div>
 						  <div class="panel-body">
 								{{graph-canvas type='Line' range='month' data=controller.datasetOne options=view.lineOptions}}
@@ -82,7 +82,7 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						  	<span class="label label-primary show-blue">km/h</span> Windstärke 
-						  	<span class="label label-primary show-blue">%</span> Luftfeuchtigkeit
+						  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
 						  </div>
 						  <div class="panel-body">
 								{{graph-canvas type='Line' range='month' data=controller.datasetTwo options=view.lineOptions}}

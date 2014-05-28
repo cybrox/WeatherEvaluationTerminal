@@ -92,6 +92,8 @@ header {
 .doublewrapper .doublebox:first-of-type { padding-left : 0; }
 .doublewrapper .doublebox:last-of-type { padding-right : 0; }
 
+.show-blue { background-color: #1c86ee; }
+.show-dark { background-color: #473c8b; }
 
 /************************************************
 ** Footer
