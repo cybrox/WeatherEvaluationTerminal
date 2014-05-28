@@ -26,7 +26,6 @@
       if (this.get('type') === 'PolarArea') {
         data = this.get('data');
       }
-      console.log(data);
       return chart = new Chart(context)[this.get('type')](data, options);
     },
     generateLables: function() {
@@ -111,13 +110,16 @@
       return this.generateDatasets();
     }).observes('content'),
     generateDatasets: function() {
-      var dataHm, dataRv, dataTm, dataWd, dataWs, day, graphdataDir, graphdataOne, graphdataTwo, num, _ref;
+      var avgHm, avgRv, avgTm, avgWs, dataHm, dataRv, dataTm, dataWd, dataWs, day, days, graphdataDir, graphdataOne, graphdataTwo, num, _ref;
+      avgTm = 0;
+      avgRv = 0;
+      avgWs = 0;
+      avgHm = 0;
       dataTm = [];
       dataRv = [];
       dataWs = [];
       dataHm = [];
       dataWd = [0, 0, 0, 0, 0, 0, 0, 0];
-      console.log(this.get('datasetAll'));
       _ref = this.get('datasetAll');
       for (num in _ref) {
         day = _ref[num];
@@ -126,8 +128,16 @@
         dataWs.push(day.wind_speed);
         dataHm.push(day.humidity);
         dataWd[Math.floor(day.wind_direction / 45)] += 1;
-        console.log(dataWd);
+        avgTm += day.temperature;
+        avgRv += day.rain_volume;
+        avgWs += day.wind_speed;
+        avgHm += day.humidity;
       }
+      days = dataTm.length;
+      this.set('avgTm', (avgTm / days).toFixed(2));
+      this.set('avgRv', (avgRv / days).toFixed(2));
+      this.set('avgWs', (avgWs / days).toFixed(2));
+      this.set('avgHm', (avgHm / days).toFixed(2));
       graphdataOne = [
         {
           strokeColor: "rgba(28,134,238,1)",
