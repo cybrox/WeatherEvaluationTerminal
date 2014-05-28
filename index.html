@@ -21,11 +21,11 @@
 	<script type="text/x-handlebars">
 		<header class="clearfix">
 			<h1 id="pagename">Wetterstation
-			  {{#link-to 'notifications' id="notifications" class="pull-right btn btn-warning"}}
-			    {{#if hasWarnings}}
-			    	<strong>{{newWarnings}} Warnungen</strong>
-			    {{/if}}
-			  {{/link-to}}
+			  {{#if hasWarnings}}
+			  	{{#link-to 'notifications' id="notifications" class="pull-right btn btn-warning"}}
+			    	<strong>{{newWarnings}} {{textWarnings}}</strong>
+			  	{{/link-to}}
+			  {{/if}}
 			</h1>
 		</header>
 		<section id="content">

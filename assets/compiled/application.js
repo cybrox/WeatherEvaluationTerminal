@@ -58,11 +58,24 @@
   });
 
   App.ApplicationController = Ember.Controller.extend({
-    newWarnings: (function() {
-      return 10;
-    }).property(),
+    init: function() {
+      $.getJSON("api/get/notification/", (function(_this) {
+        return function(payload) {
+          return _this.set('newWarnings', payload.data.length);
+        };
+      })(this));
+      return this._super();
+    },
+    newWarnings: 0,
     hasWarnings: (function() {
       return this.get('newWarnings') > 0;
+    }).property('newWarnings'),
+    textWarnings: (function() {
+      if (this.get('newWarnings') === 1) {
+        return 'Warnung';
+      } else {
+        return 'Warnungen';
+      }
     }).property('newWarnings')
   });
 
