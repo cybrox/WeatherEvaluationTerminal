@@ -13,7 +13,9 @@ App.WeatherController = Ember.Controller.extend
     daylist = {}
 
     # Check if there even is stuff
-    @set('noData', (dataset.data.length == 0))
+    @setProperties(
+      'noData': (dataset.data.length == 0),
+      'numMes': dataset.data.length)
     if dataset.data.length == 0 then return;
 
     for data in dataset.data
@@ -30,6 +32,7 @@ App.WeatherController = Ember.Controller.extend
         ws += entry.wind_speed
 
       daylist[num] =
+        day: num
         humidity: hm/day.length
         rain_volume: rv/day.length
         temperature: tm/day.length
@@ -41,10 +44,17 @@ App.WeatherController = Ember.Controller.extend
   ).observes('content')
 
   generateDatasets: ->
-    avgTm = 0; avgRv = 0; avgWs = 0; avgHm = 0;
+    avgTm = 0; avgRv = 0; avgWs = 0; avgHm = 0; dd = 0;
     dataTm = []; dataRv = []; dataWs = [];dataHm = [];
     dataWd = [0,0,0,0,0,0,0,0];
-    for num,day of @get('datasetAll')
+    dataIs = @get('datasetAll')
+
+    # Fill empty days
+    for num in [1..28]
+      if dataIs[num] == undefined and num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']
+        dataIs[num] = {humidity: 0, rain_volume: 0, temperature: 0, wind_direction: 0, wind_speed: 0}
+
+    for num,day of dataIs
       dataTm.push(day.temperature)
       dataRv.push(day.rain_volume)
       dataWs.push(day.wind_speed)

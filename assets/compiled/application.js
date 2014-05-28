@@ -2,9 +2,7 @@
 (function() {
   var App;
 
-  App = Ember.Application.create({
-    LOG_TRANSITIONS: true
-  });
+  App = Ember.Application.create();
 
   App.GraphCanvasComponent = Ember.Component.extend({
     tagName: 'canvas',
@@ -102,7 +100,10 @@
       dataset = this.get('content');
       dataday = {};
       daylist = {};
-      this.set('noData', dataset.data.length === 0);
+      this.setProperties({
+        'noData': dataset.data.length === 0,
+        'numMes': dataset.data.length
+      });
       if (dataset.data.length === 0) {
         return;
       }
@@ -130,6 +131,7 @@
           ws += entry.wind_speed;
         }
         daylist[num] = {
+          day: num,
           humidity: hm / day.length,
           rain_volume: rv / day.length,
           temperature: tm / day.length,
@@ -141,19 +143,31 @@
       return this.generateDatasets();
     }).observes('content'),
     generateDatasets: function() {
-      var avgHm, avgRv, avgTm, avgWs, dataHm, dataRv, dataTm, dataWd, dataWs, day, days, graphdataDir, graphdataOne, graphdataTwo, num, _ref;
+      var avgHm, avgRv, avgTm, avgWs, dataHm, dataIs, dataRv, dataTm, dataWd, dataWs, day, days, dd, graphdataDir, graphdataOne, graphdataTwo, num, _i;
       avgTm = 0;
       avgRv = 0;
       avgWs = 0;
       avgHm = 0;
+      dd = 0;
       dataTm = [];
       dataRv = [];
       dataWs = [];
       dataHm = [];
       dataWd = [0, 0, 0, 0, 0, 0, 0, 0];
-      _ref = this.get('datasetAll');
-      for (num in _ref) {
-        day = _ref[num];
+      dataIs = this.get('datasetAll');
+      for (num = _i = 1; _i <= 28; num = ++_i) {
+        if (dataIs[num] === void 0 && num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']) {
+          dataIs[num] = {
+            humidity: 0,
+            rain_volume: 0,
+            temperature: 0,
+            wind_direction: 0,
+            wind_speed: 0
+          };
+        }
+      }
+      for (num in dataIs) {
+        day = dataIs[num];
         dataTm.push(day.temperature);
         dataRv.push(day.rain_volume);
         dataWs.push(day.wind_speed);
