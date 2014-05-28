@@ -102,6 +102,10 @@
       dataset = this.get('content');
       dataday = {};
       daylist = {};
+      this.set('noData', dataset.data.length === 0);
+      if (dataset.data.length === 0) {
+        return;
+      }
       _ref = dataset.data;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         data = _ref[_i];
@@ -327,9 +331,15 @@
       datasetFill: false,
       scaleLineWidth: 2,
       pointDotRadius: 1,
-      pointDotStrokeWidth: 2
+      pointDotStrokeWidth: 2,
+      animationSteps: 20
     },
-    areaOptions: {}
+    areaOptions: {
+      animationSteps: 20
+    },
+    updateGraphs: (function() {
+      return this.rerender();
+    }).observes('controller.datasetOne')
   });
 
 }).call(this);

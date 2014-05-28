@@ -4,8 +4,13 @@ App.WeatherView = Ember.View.extend
     scaleLineWidth: 2
     pointDotRadius: 1
     pointDotStrokeWidth: 2
+    animationSteps: 20
   }
 
   areaOptions: {
-    
+    animationSteps: 20
   }
+
+  updateGraphs: (->
+    @rerender()
+  ).observes('controller.datasetOne')

@@ -55,55 +55,59 @@
 			<button {{action 'goNext'}} class="btn btn-primary pull-right">{{nextMonth}} &#xbb;</button>
 		</h1>
 		<section id="contentInner">
-			<section id="monthview">
-				<div class="doublewrapper">
-					<div class="doublebox col-md-8">
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-						  	<span class="label label-primary show-blue">°C</span> Temperatur 
-						  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
-						  </div>
-						  <div class="panel-body">
-								{{graph-canvas type='Line' range='month' data=controller.datasetOne options=view.lineOptions}}
-						  </div>
+			{{#if noData}}
+				<p class="btn btn-danger full-size">Zum ausgewählten Monat sind keine Wetterdaten verfügbar.</p>
+			{{else}}
+				<section id="monthview">
+					<div class="doublewrapper">
+						<div class="doublebox col-md-8">
+							<div class="panel panel-default">
+							  <div class="panel-heading">
+							  	<span class="label label-primary show-blue">°C</span> Temperatur 
+							  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
+							  </div>
+							  <div class="panel-body">
+									{{graph-canvas type='Line' range='month' data=controller.datasetOne options=view.lineOptions}}
+							  </div>
+							</div>
+						</div>
+						<div class="doublebox col-md-4">
+							<div class="panel panel-default">
+							  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
+							  <div class="panel-body nopadd">
+									{{graph-canvas type='Radar' range='direction' data=controller.datasetDir options=view.areaOptions}}
+							  </div>
+							</div>
 						</div>
 					</div>
-					<div class="doublebox col-md-4">
-						<div class="panel panel-default">
-						  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
-						  <div class="panel-body nopadd">
-								{{graph-canvas type='Radar' range='direction' data=controller.datasetDir options=view.areaOptions}}
-						  </div>
+					<div class="doublewrapper">
+						<div class="doublebox col-md-8">
+							<div class="panel panel-default">
+							  <div class="panel-heading">
+							  	<span class="label label-primary show-blue">km/h</span> Windstärke 
+							  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
+							  </div>
+							  <div class="panel-body">
+									{{graph-canvas type='Line' range='month' data=controller.datasetTwo options=view.lineOptions}}
+							  </div>
+							</div>
+						</div>
+						<div class="doublebox col-md-4">
+							<div class="panel panel-default">
+							  <div class="panel-heading">Durchschnttswerte</div>
+							  <div class="panel-body nopadd">
+									<table class="table table-striped">
+										<tr><td>Temperatur</td><td>{{avgTm}}°C</td></tr>
+										<tr><td>Regenmenge</td><td>{{avgRv}}mm/m3</td></tr>
+										<tr><td>Windstärke</td><td>{{avgWs}}km/h</td></tr>
+										<tr><td>Luftfeuchtigkeit</td><td>{{avgHm}}%</td></tr>
+									</table>
+							  </div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="doublewrapper">
-					<div class="doublebox col-md-8">
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-						  	<span class="label label-primary show-blue">km/h</span> Windstärke 
-						  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
-						  </div>
-						  <div class="panel-body">
-								{{graph-canvas type='Line' range='month' data=controller.datasetTwo options=view.lineOptions}}
-						  </div>
-						</div>
-					</div>
-					<div class="doublebox col-md-4">
-						<div class="panel panel-default">
-						  <div class="panel-heading">Durchschnttswerte</div>
-						  <div class="panel-body nopadd">
-								<table class="table table-striped">
-									<tr><td>Temperatur</td><td>{{avgTm}}°C</td></tr>
-									<tr><td>Regenmenge</td><td>{{avgRv}}mm/m3</td></tr>
-									<tr><td>Windstärke</td><td>{{avgWs}}km/h</td></tr>
-									<tr><td>Luftfeuchtigkeit</td><td>{{avgHm}}%</td></tr>
-								</table>
-						  </div>
-						</div>
-					</div>
-				</div>
-			</section>
+				</section>
+			{{/if}}
 		</section>
 	</script>
 

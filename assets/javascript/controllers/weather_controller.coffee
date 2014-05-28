@@ -11,6 +11,11 @@ App.WeatherController = Ember.Controller.extend
     dataset = @get('content')
     dataday = {}
     daylist = {}
+
+    # Check if there even is stuff
+    @set('noData', (dataset.data.length == 0))
+    if dataset.data.length == 0 then return;
+
     for data in dataset.data
       dataday[data.day] = new Array if dataday[data.day] == undefined
       dataday[data.day].push(data)
