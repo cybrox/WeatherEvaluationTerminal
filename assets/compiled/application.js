@@ -66,7 +66,13 @@
     }).property('newWarnings')
   });
 
-  App.NotificationsController = Ember.Controller.extend();
+  App.NotificationsController = Ember.Controller.extend({
+    actions: {
+      markRead: function(id) {
+        return console.log(id);
+      }
+    }
+  });
 
   App.WeatherController = Ember.Controller.extend({
     monthList: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
@@ -259,6 +265,16 @@
         currentMonth = "0" + currentMonth;
       }
       return currentMonth;
+    }
+  });
+
+  App.NotificationsRoute = Ember.Route.extend({
+    model: function() {
+      return $.getJSON("api/get/notification/", (function(_this) {
+        return function(payload) {
+          return payload;
+        };
+      })(this));
     }
   });
 

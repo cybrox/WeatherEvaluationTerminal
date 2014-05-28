@@ -112,11 +112,25 @@
 	<script type="text/x-handlebars" id="notifications">
 		<h1 id="monthselect">Systemmeldungen</h1>
 		<section id="contentInner">
-			{{#link-to 'index' class="btn btn-primary"}}&#xab; Zurück zur Monatsansicht{{/link-to}}
-			<table class="table table-striped">
-				
+			{{#link-to 'index' class="pull-left btn btn-primary surr"}}&#xab; Zurück zur Monatsansicht{{/link-to}}
+			<p class="info textblock">
+				Systemmeldungen werden von der Benutzeroberfläche der Wetterstation generiert,
+				wenn die Station einen Ungültigen Wert zurückliefert. Dazu gehören Werte ausserhalb
+				der angegebenen Messbereiche (zb. Windgeschwindigkeit > 100km/h) oder andere,
+				aussergewöhnliche Ereignisse. Es empfiehlt sich, die Station beim vermehrten Auftreten
+				von Systemmeldungen auf ihre Funktion zu überprüfen. Systemmeldungen können mit einem
+				Klick auf den Ok! - Button als gelesen markiert werden.
+			</p>
+			<table class="table table-striped top-spacing">
+				{{#each controller.content.data}}
+					<tr>
+						<td class="full-size"><span class="label label-warning">{{type}}</span> {{message}}</td>
+						<td><button {{action 'markRead' id}} class="btn btn-xs btn-success">Ok!</button></td>
+					</tr>
+				{{else}}
+					<tr><td>Keine anstehenden Systemmeldungen gefunden.</td></tr>
+				{{/each}}
 			</table>
-			...
 		</section>
 	</script>
 

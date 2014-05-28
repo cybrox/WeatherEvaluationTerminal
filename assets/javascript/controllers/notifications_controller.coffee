@@ -1,1 +1,4 @@
-App.NotificationsController = Ember.Controller.extend()
+App.NotificationsController = Ember.Controller.extend
+  actions:
+    markRead: (id) ->
+      console.log id
