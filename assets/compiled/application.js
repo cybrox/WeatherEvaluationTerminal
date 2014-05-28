@@ -71,30 +71,6 @@
 
   App.WeatherController = Ember.Controller.extend({
     monthList: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-    dataset1: [
-      {
-        fillColor: "rgba(220,220,220,0.5)",
-        strokeColor: "rgba(220,220,220,1)",
-        pointColor: "rgba(220,220,220,1)",
-        pointStrokeColor: "#fff",
-        data: [65, 59, 90, 81, 56, 55, 40]
-      }, {
-        fillColor: "rgba(151,187,205,0.5)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
-        pointStrokeColor: "#fff",
-        data: [28, 48, 40, 19, 96, 27, 100]
-      }
-    ],
-    dataset2: [
-      {
-        fillColor: "rgba(220,220,220,0.5)",
-        strokeColor: "rgba(220,220,220,1)",
-        pointColor: "rgba(220,220,220,1)",
-        pointStrokeColor: "#fff",
-        data: [65, 59, 90, 81, 56, 55, 40, 10]
-      }
-    ],
     initializeData: (function() {
       var data, dataday, dataset, day, daylist, entry, hm, num, rv, tm, wd, ws, _i, _j, _len, _len1, _ref;
       dataset = this.get('content');
@@ -140,7 +116,7 @@
       dataRv = [];
       dataWs = [];
       dataHm = [];
-      dataWd = [];
+      dataWd = [0, 0, 0, 0, 0, 0, 0, 0];
       console.log(this.get('datasetAll'));
       _ref = this.get('datasetAll');
       for (num in _ref) {
@@ -149,7 +125,8 @@
         dataRv.push(day.rain_volume);
         dataWs.push(day.wind_speed);
         dataHm.push(day.humidity);
-        dataWd.push(day.wind_direction);
+        dataWd[Math.floor(day.wind_direction / 45)] += 1;
+        console.log(dataWd);
       }
       graphdataOne = [
         {

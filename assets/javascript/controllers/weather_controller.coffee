@@ -36,14 +36,18 @@ App.WeatherController = Ember.Controller.extend
   ).observes('content')
 
   generateDatasets: ->
-    dataTm = []; dataRv = []; dataWs = [];dataHm = []; dataWd = [];
+    dataTm = []; dataRv = []; dataWs = [];dataHm = [];
+    dataWd = [0,0,0,0,0,0,0,0];
     console.log @get('datasetAll')
     for num,day of @get('datasetAll')
       dataTm.push(day.temperature)
       dataRv.push(day.rain_volume)
       dataWs.push(day.wind_speed)
       dataHm.push(day.humidity)
-      dataWd.push(day.wind_direction)
+      dataWd[(Math.floor(day.wind_direction/45))] += 1;
+
+      console.log dataWd
+      
 
     graphdataOne = [{
         strokeColor : "rgba(28,134,238,1)",
