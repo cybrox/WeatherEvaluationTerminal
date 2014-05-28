@@ -81,8 +81,16 @@
 
   App.NotificationsController = Ember.Controller.extend({
     actions: {
-      markRead: function(id) {
-        return console.log(id);
+      markRead: function(uid) {
+        return $.getJSON("api/set/notification/" + uid, (function(_this) {
+          return function(payload) {
+            if (payload.success !== true) {
+              return alert("something went wrong.");
+            } else {
+              return $('#' + uid).fadeOut(300);
+            }
+          };
+        })(this));
       }
     }
   });

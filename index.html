@@ -123,9 +123,9 @@
 			</p>
 			<table class="table table-striped top-spacing">
 				{{#each controller.content.data}}
-					<tr>
-						<td class="full-size"><span class="label label-warning">{{type}}</span> {{message}}</td>
-						<td><button {{action 'markRead' id}} class="btn btn-xs btn-success">Ok!</button></td>
+					<tr {{bind-attr id=uid}}>
+						<td class="full-size"><span class="label label-warning">{{date}}</span> {{message}}</td>
+						<td><button {{action 'markRead' uid}} class="btn btn-xs btn-success">Ok!</button></td>
 					</tr>
 				{{else}}
 					<tr><td>Keine anstehenden Systemmeldungen gefunden.</td></tr>
