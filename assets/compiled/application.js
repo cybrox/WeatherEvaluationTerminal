@@ -343,6 +343,14 @@
   });
 
   App.WeatherView = Ember.View.extend({
+    init: function() {
+      window.onresize = function(e) {
+        return setTimeout(function() {
+          return location.reload();
+        }, 500);
+      };
+      return this._super();
+    },
     lineOptions: {
       datasetFill: false,
       scaleLineWidth: 2,
