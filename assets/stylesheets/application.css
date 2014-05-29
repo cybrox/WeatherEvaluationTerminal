@@ -12,8 +12,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: url(../images/background.jpg) left top no-repeat;
-	background-position: fixed;
+	background: url(../images/background.jpg) left top no-repeat fixed;
 	background-size: cover;
 }
 
