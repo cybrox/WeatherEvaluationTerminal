@@ -1,13 +1,4 @@
 App.WeatherView = Ember.View.extend
-  
-  init: ->
-    # Simply reload page to re-render graphs
-    # instead of hacking into Ember from the outside in.
-    window.onresize = (e) ->
-      setTimeout ()->
-        location.reload()
-      , 500
-    @_super()
 
   lineOptions: {
     datasetFill: false
