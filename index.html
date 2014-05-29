@@ -57,7 +57,7 @@
 				Wetterdaten Monatsansicht &bull; {{currentMonth}}
 				<button {{action 'goNext'}} class="btn btn-primary pull-right">{{nextMonth}} &#xbb;</button>
 			</div>
-			<div class="panel-body">
+			<div id="dataview" class="panel-body nopadd">
 				{{#if noData}}
 					<p class="btn btn-warning full-size">
 						Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.<br /><br />
@@ -114,60 +114,58 @@
 							</div>
 						</div>
 					</section>
-					<section id="dayview" class="clearfix panel panel-default">
-					  <div class="panel-heading">
-					  	<span id="dayview-title">Tagesansicht</span>
-					  	<span class="pull-right">Zeige Daten von Tag {{view Ember.Select content=availableDays value=selectedDay}}</span>
-					  </div>
-					  <div class="panel-body nopadd">
-							<div class="doublewrapper">
-								<div class="doublebox col-md-8">
-									<div class="panel panel-default">
-									  <div class="panel-heading">
-									  	<span class="label label-primary show-blue">°C</span> Temperatur 
-									  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
-									  </div>
-									  <div class="panel-body">
-											{{graph-canvas type='Line' range='day' data=dayGraph.one options=view.lineOptions}}
-									  </div>
-									</div>
-								</div>
-								<div class="doublebox col-md-4">
-									<div class="panel panel-default">
-									  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
-									  <div class="panel-body nopadd">
-											{{graph-canvas type='Radar' range='direction' data=dayGraph.dir options=view.areaOptions}}
-									  </div>
-									</div>
+				  <section id="dayselect">
+				  	<span>Tagesansicht</span>
+				  	<span class="pull-right">Zeige Daten von Tag {{view Ember.Select class="form-control" content=availableDays value=selectedDay}}</span>
+				  </div>
+					<section id="dayview" class="clearfix">
+						<div class="doublewrapper">
+							<div class="doublebox col-md-8">
+								<div class="panel panel-default">
+								  <div class="panel-heading">
+								  	<span class="label label-primary show-blue">°C</span> Temperatur 
+								  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
+								  </div>
+								  <div class="panel-body">
+										{{graph-canvas type='Line' range='day' data=dayGraph.one options=view.lineOptions}}
+								  </div>
 								</div>
 							</div>
-							<div class="doublewrapper">
-								<div class="doublebox col-md-8">
-									<div class="panel panel-default">
-									  <div class="panel-heading">
-									  	<span class="label label-primary show-blue">km/h</span> Windstärke 
-									  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
-									  </div>
-									  <div class="panel-body">
-											{{graph-canvas type='Line' range='day' data=dayGraph.two options=view.lineOptions}}
-									  </div>
-									</div>
-								</div>
-								<div class="doublebox col-md-4">
-									<div class="panel panel-default">
-									  <div class="panel-heading">Durchschnttswerte aus {{numMes}} Messungen</div>
-									  <div class="panel-body nopadd">
-											<table class="table table-striped">
-												<tr><td>Temperatur</td><td>{{dayAvg.tm}}°C</td></tr>
-												<tr><td>Regenmenge</td><td>{{dayAvg.rv}}mm/m3</td></tr>
-												<tr><td>Windstärke</td><td>{{dayAvg.ws}}km/h</td></tr>
-												<tr><td>Luftfeuchtigkeit</td><td>{{dayAvg.hm}}%</td></tr>
-											</table>
-									  </div>
-									</div>
+							<div class="doublebox col-md-4">
+								<div class="panel panel-default">
+								  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
+								  <div class="panel-body nopadd">
+										{{graph-canvas type='Radar' range='direction' data=dayGraph.dir options=view.areaOptions}}
+								  </div>
 								</div>
 							</div>
-					  </div>
+						</div>
+						<div class="doublewrapper">
+							<div class="doublebox col-md-8">
+								<div class="panel panel-default">
+								  <div class="panel-heading">
+								  	<span class="label label-primary show-blue">km/h</span> Windstärke 
+								  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
+								  </div>
+								  <div class="panel-body">
+										{{graph-canvas type='Line' range='day' data=dayGraph.two options=view.lineOptions}}
+								  </div>
+								</div>
+							</div>
+							<div class="doublebox col-md-4">
+								<div class="panel panel-default">
+								  <div class="panel-heading">Durchschnttswerte aus {{numMes}} Messungen</div>
+								  <div class="panel-body nopadd">
+										<table class="table table-striped">
+											<tr><td>Temperatur</td><td>{{dayAvg.tm}}°C</td></tr>
+											<tr><td>Regenmenge</td><td>{{dayAvg.rv}}mm/m3</td></tr>
+											<tr><td>Windstärke</td><td>{{dayAvg.ws}}km/h</td></tr>
+											<tr><td>Luftfeuchtigkeit</td><td>{{dayAvg.hm}}%</td></tr>
+										</table>
+								  </div>
+								</div>
+							</div>
+						</div>
 					</section>
 				{{/if}}
 			</div>

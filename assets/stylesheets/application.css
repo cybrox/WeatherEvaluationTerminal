@@ -50,11 +50,10 @@ header {
 
 #monthselect {
 	margin: 0 0 20px 0;
-	padding: 10px 10%;
+	padding: 10px 1%;
 	text-align: center;
-	font-size: 2.1em;
+	font-size: 1.8em;
 	color: #999;
-	background: rgba(255,255,255,0.9);
 }
 
 
@@ -69,18 +68,33 @@ header {
 	min-height: 800px;
 }
 
-#daydivider {
-	width: 100%;
-	padding: 7px 0;
-	background: #fff;
+#monthview,
+#dayview {
+	padding: 15px 1%;
 }
 
-#dayview .panel-body .panel,
-#dayview .panel-body .panel-body,
-#dayview .panel-body .panel-heading {
-	border: none;
-	background: none;
-	background-color: none;
+#dayselect {
+	width: 100%;
+	padding: 10px 15px;
+	background: #f5f5f5;
+	margin: 0 0 20px 0;
+	padding: 10px 1%;
+	font-size: 1.4em;
+	color: #999;
+}
+
+#monthview .panel,
+#monthview .panel-body,
+#monthview .panel-heading,
+#dayview .panel,
+#dayview .panel-body,
+#dayview .panel-heading {
+	border-color: #f6f6f6;
+}
+
+#monthview .panel-heading,
+#dayview .panel-heading {
+	background: #f8f8f8;
 }
 
 
@@ -103,6 +117,11 @@ header {
 .top-spacing { margin-top: 70px; }
 .full-size { width: 100%; }
 .surr { margin: 0 20px 20px 0; }
+
+.form-control {
+	display: inline;
+	width: auto;
+}
 
 #loader {
 	position: fixed;
