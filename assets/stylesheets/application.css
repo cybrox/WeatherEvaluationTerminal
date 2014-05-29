@@ -67,7 +67,6 @@ header {
 	width: 80%;
 	margin: 10px 10%;
 	padding: 0;
-	min-height: 800px;
 }
 
 #monthview,
@@ -120,6 +119,12 @@ header {
 .top-spacing { margin-top: 70px; }
 .full-size { width: 100%; }
 .surr { margin: 0 20px 20px 0; }
+
+.table-striped th,
+.table-striped td {
+	border: none;
+	border-top: none !important;
+}
 
 .form-control {
 	display: inline;
