@@ -59,6 +59,8 @@ header {
 	background: rgba(255,255,255,0.9);
 }
 
+
+
 /************************************************
 ** Content
 */
@@ -75,6 +77,14 @@ header {
 	width: 100%;
 	padding: 7px 0;
 	background: #fff;
+}
+
+#dayview .panel-body .panel,
+#dayview .panel-body .panel-body,
+#dayview .panel-body .panel-heading {
+	border: none;
+	background: none;
+	background-color: none;
 }
 
 
@@ -103,6 +113,8 @@ header {
 	bottom: 10px;
 	left: 10px;
 }
+
+
 
 /************************************************
 ** Footer
