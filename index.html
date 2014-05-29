@@ -59,11 +59,13 @@
 			</div>
 			<div id="dataview" class="panel-body nopadd">
 				{{#if noData}}
-					<p class="btn btn-warning full-size">
-						Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.<br /><br />
-						Falls die Wetterstation gerade erst in Betrieb genommen wurde,
-						kann es bis zu 15 Minuten dauern, bis die ersten Messdaten vorliegen.
-					</p>
+					<div class="addpadd">
+						<p class="btn btn-warning full-size">
+							Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.<br /><br />
+							Falls die Wetterstation gerade erst in Betrieb genommen wurde,
+							kann es bis zu 15 Minuten dauern, bis die ersten Messdaten vorliegen.
+						</p>
+					</div>
 				{{else}}
 					<section id="monthview" class="clearfix">
 						<div class="doublewrapper">
@@ -116,8 +118,10 @@
 					</section>
 				  <section id="dayselect">
 				  	<span>Tagesansicht</span>
-				  	<span class="pull-right">Zeige Daten von Tag {{view Ember.Select class="form-control" content=availableDays value=selectedDay}}</span>
-				  </div>
+				  	<div class="pull-right">
+				  		Zeige Daten von Tag {{view Ember.Select class="form-control" content=availableDays value=selectedDay}}
+				  	</div>
+				  </section>
 					<section id="dayview" class="clearfix">
 						<div class="doublewrapper">
 							<div class="doublebox col-md-8">

@@ -103,6 +103,7 @@ header {
 ** Frontend Framework parts
 */
 .break { clear: both; }
+.addpadd { padding: 15px; }
 .nopadd { padding: 0; }
 .nopadd table { margin: 0; }
 .nopadd table tr:first-of-type td { border-top: none; }
