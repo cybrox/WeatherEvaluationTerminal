@@ -108,7 +108,7 @@
 
   App.WeatherController = Ember.Controller.extend({
     monthList: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-    initializeData: (function() {
+    initializeMonthData: (function() {
       var data, dataday, dataset, day, daylist, entry, hm, num, rv, tm, wd, ws, _i, _j, _len, _len1, _ref;
       dataset = this.get('content');
       dataday = {};
@@ -152,11 +152,30 @@
           wind_speed: ws / day.length
         };
       }
-      this.set('datasetAll', daylist);
-      return this.generateDatasets();
+      this.setProperties({
+        'availableDays': Object.keys(daylist),
+        'selectedDay': Object.keys(daylist)[0],
+        'datasetAll': daylist
+      });
+      return this.generateDatasets('month', this.get('datasetAll'));
     }).observes('content'),
-    generateDatasets: function() {
-      var avgHm, avgRv, avgTm, avgWs, dataHm, dataIs, dataRv, dataTm, dataWd, dataWs, day, days, dd, graphdataDir, graphdataOne, graphdataTwo, num, _i;
+    initializeDayData: (function() {
+      var dayData, dayNumr, element, thisDay, _i, _len, _ref;
+      thisDay = this.get('selectedDay');
+      dayNumr = 0;
+      dayData = {};
+      _ref = this.get('content').data;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        element = _ref[_i];
+        if (element.day === parseInt(thisDay)) {
+          dayData[dayNumr] = element;
+          dayNumr++;
+        }
+      }
+      return this.generateDatasets('day', dayData);
+    }).observes('selectedDay'),
+    generateDatasets: function(scope, dataIs) {
+      var avgHm, avgRv, avgTm, avgWs, data, dataHm, dataRv, dataTm, dataWd, dataWs, day, days, dd, graphdataDir, graphdataOne, graphdataTwo, num, _i;
       avgTm = 0;
       avgRv = 0;
       avgWs = 0;
@@ -167,16 +186,17 @@
       dataWs = [];
       dataHm = [];
       dataWd = [0, 0, 0, 0, 0, 0, 0, 0];
-      dataIs = this.get('datasetAll');
-      for (num = _i = 1; _i <= 28; num = ++_i) {
-        if (dataIs[num] === void 0 && num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']) {
-          dataIs[num] = {
-            humidity: 0,
-            rain_volume: 0,
-            temperature: 0,
-            wind_direction: 0,
-            wind_speed: 0
-          };
+      if (scope === 'month') {
+        for (num = _i = 1; _i <= 28; num = ++_i) {
+          if (dataIs[num] === void 0 && num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']) {
+            dataIs[num] = {
+              humidity: 0,
+              rain_volume: 0,
+              temperature: 0,
+              wind_direction: 0,
+              wind_speed: 0
+            };
+          }
         }
       }
       for (num in dataIs) {
@@ -191,11 +211,6 @@
         avgWs += day.wind_speed;
         avgHm += day.humidity;
       }
-      days = dataTm.length;
-      this.set('avgTm', (avgTm / days).toFixed(2));
-      this.set('avgRv', (avgRv / days).toFixed(2));
-      this.set('avgWs', (avgWs / days).toFixed(2));
-      this.set('avgHm', (avgHm / days).toFixed(2));
       graphdataOne = [
         {
           strokeColor: "rgba(28,134,238,1)",
@@ -227,9 +242,20 @@
           data: dataWd
         }
       ];
-      this.set('datasetOne', graphdataOne);
-      this.set('datasetTwo', graphdataTwo);
-      return this.set('datasetDir', graphdataDir);
+      data = {};
+      days = dataTm.length;
+      data[scope + 'Graph'] = {
+        'one': graphdataOne,
+        'two': graphdataTwo,
+        'dir': graphdataDir
+      };
+      data[scope + 'Avg'] = {
+        'tm': (avgTm / days).toFixed(2),
+        'rv': (avgRv / days).toFixed(2),
+        'ws': (avgWs / days).toFixed(2),
+        'hm': (avgHm / days).toFixed(2)
+      };
+      return this.setProperties(data);
     },
     currentMonth: (function() {
       var monthList;

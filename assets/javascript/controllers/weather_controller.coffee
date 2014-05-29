@@ -7,7 +7,7 @@ App.WeatherController = Ember.Controller.extend
 
 
   # Value for month overview graphs -------------------------------------------
-  initializeData: (->
+  initializeMonthData: (->
     dataset = @get('content')
     dataday = {}
     daylist = {}
@@ -39,20 +39,43 @@ App.WeatherController = Ember.Controller.extend
         wind_direction: wd/day.length
         wind_speed: ws/day.length
 
-    @set('datasetAll', daylist)
-    @generateDatasets()
+    @setProperties(
+      'availableDays': Object.keys(daylist)
+      'selectedDay': Object.keys(daylist)[0]
+      'datasetAll': daylist
+    )
+    @generateDatasets('month', @get('datasetAll'))
   ).observes('content')
 
-  generateDatasets: ->
+
+
+  # Value for day overview graphs ---------------------------------------------
+  initializeDayData: (->
+    thisDay = @get('selectedDay')
+    dayNumr = 0
+    dayData = {}
+
+    for element in @get('content').data
+      if element.day == parseInt(thisDay)
+        dayData[dayNumr] = element
+        dayNumr++;
+
+    @generateDatasets('day', dayData)
+  ).observes('selectedDay')
+
+
+
+  # Generator for chartjs compatible data -------------------------------------
+  generateDatasets: (scope, dataIs)->
     avgTm = 0; avgRv = 0; avgWs = 0; avgHm = 0; dd = 0;
     dataTm = []; dataRv = []; dataWs = [];dataHm = [];
     dataWd = [0,0,0,0,0,0,0,0];
-    dataIs = @get('datasetAll')
 
-    # Fill empty days
-    for num in [1..28]
-      if dataIs[num] == undefined and num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']
-        dataIs[num] = {humidity: 0, rain_volume: 0, temperature: 0, wind_direction: 0, wind_speed: 0}
+    # Fill empty days if scope is set to month
+    if scope == 'month'
+      for num in [1..28]
+        if dataIs[num] == undefined and num < dataIs[Object.keys(dataIs)[Object.keys(dataIs).length - 1]]['day']
+          dataIs[num] = {humidity: 0, rain_volume: 0, temperature: 0, wind_direction: 0, wind_speed: 0}
 
     for num,day of dataIs
       dataTm.push(day.temperature)
@@ -65,12 +88,6 @@ App.WeatherController = Ember.Controller.extend
       avgRv += day.rain_volume
       avgWs += day.wind_speed
       avgHm += day.humidity
-
-    days = dataTm.length
-    @set('avgTm', (avgTm / days).toFixed(2))
-    @set('avgRv', (avgRv / days).toFixed(2))
-    @set('avgWs', (avgWs / days).toFixed(2))
-    @set('avgHm', (avgHm / days).toFixed(2))
 
     graphdataOne = [{
         strokeColor : "rgba(28,134,238,1)",
@@ -100,9 +117,21 @@ App.WeatherController = Ember.Controller.extend
       data : dataWd
     }]
 
-    @set('datasetOne', graphdataOne)
-    @set('datasetTwo', graphdataTwo)
-    @set('datasetDir', graphdataDir)
+    data = {}
+    days = dataTm.length
+    data[scope+'Graph'] = 
+      'one': graphdataOne
+      'two': graphdataTwo
+      'dir': graphdataDir
+
+    data[scope+'Avg'] = 
+      'tm': (avgTm / days).toFixed(2)
+      'rv': (avgRv / days).toFixed(2)
+      'ws': (avgWs / days).toFixed(2)
+      'hm': (avgHm / days).toFixed(2)
+
+
+    @setProperties(data)
 
 
 

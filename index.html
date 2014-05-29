@@ -68,7 +68,7 @@
 							  	<span class="label label-primary show-dark">mm/m3</span> Regenmenge
 							  </div>
 							  <div class="panel-body">
-									{{graph-canvas type='Line' range='month' data=controller.datasetOne options=view.lineOptions}}
+									{{graph-canvas type='Line' range='month' data=monthGraph.one options=view.lineOptions}}
 							  </div>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 							<div class="panel panel-default">
 							  <div class="panel-heading"><span class="label label-default">Tage</span> Windrichtung</div>
 							  <div class="panel-body nopadd">
-									{{graph-canvas type='Radar' range='direction' data=controller.datasetDir options=view.areaOptions}}
+									{{graph-canvas type='Radar' range='direction' data=monthGraph.dir options=view.areaOptions}}
 							  </div>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							  	<span class="label label-primary show-dark">%</span> Luftfeuchtigkeit
 							  </div>
 							  <div class="panel-body">
-									{{graph-canvas type='Line' range='month' data=controller.datasetTwo options=view.lineOptions}}
+									{{graph-canvas type='Line' range='month' data=monthGraph.two options=view.lineOptions}}
 							  </div>
 							</div>
 						</div>
@@ -98,17 +98,24 @@
 							  <div class="panel-heading">Durchschnttswerte aus {{numMes}} Messungen</div>
 							  <div class="panel-body nopadd">
 									<table class="table table-striped">
-										<tr><td>Temperatur</td><td>{{avgTm}}°C</td></tr>
-										<tr><td>Regenmenge</td><td>{{avgRv}}mm/m3</td></tr>
-										<tr><td>Windstärke</td><td>{{avgWs}}km/h</td></tr>
-										<tr><td>Luftfeuchtigkeit</td><td>{{avgHm}}%</td></tr>
+										<tr><td>Temperatur</td><td>{{monthAvg.tm}}°C</td></tr>
+										<tr><td>Regenmenge</td><td>{{monthAvg.rv}}mm/m3</td></tr>
+										<tr><td>Windstärke</td><td>{{monthAvg.ws}}km/h</td></tr>
+										<tr><td>Luftfeuchtigkeit</td><td>{{monthAvg.hm}}%</td></tr>
 									</table>
 							  </div>
 							</div>
 						</div>
 					</div>
 				</section>
-				<section id="dayview" class="clearfix">
+				<section id="dayview" class="clearfix panel panel-default">
+				  <div class="panel-heading">
+				  	<span id="dayview-title">Tagesansicht</span>
+				  	<span class="pull-right">Zeige Daten von Tag {{view Ember.Select content=availableDays value=selectedDay}}</span>
+				  </div>
+				  <div class="panel-body nopadd">
+						...
+				  </div>
 				</section>
 			{{/if}}
 		</section>
@@ -144,7 +151,7 @@
 
 	<script type="text/javascript" src="assets/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/handlebars.min.js"></script>
-	<script type="text/javascript" src="assets/vendor/ember.min.js"></script>
+	<script type="text/javascript" src="assets/vendor/ember.dbg.js"></script>
 	<script type="text/javascript" src="assets/vendor/chart.min.js"></script>
 	<script type="text/javascript" src="assets/compiled/application.js"></script>
 </body>
