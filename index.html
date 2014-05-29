@@ -57,7 +57,11 @@
 		<section id="contentInner">
 			{{#if loading}} <p id="loader" class="btn btn-primary">Lade...</p> {{/if}}
 			{{#if noData}}
-				<p class="btn btn-danger full-size">Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.</p>
+				<p class="btn btn-warning full-size">
+					Im ausgewählten Monat wurden keine Wetterdaten aufgezeichnet.<br /><br />
+					Falls die Wetterstation gerade erst in Betrieb genommen wurde,
+					kann es bis zu 15 Minuten dauern, bis die ersten Messdaten vorliegen.
+				</p>
 			{{else}}
 				<section id="monthview" class="clearfix">
 					<div class="doublewrapper">
