@@ -7,7 +7,7 @@
   App.GraphCanvasComponent = Ember.Component.extend({
     tagName: 'canvas',
     didInsertElement: function() {
-      var canvas, chart, context, data, jqcanv, options;
+      var canvas, context, jqcanv, options;
       canvas = this.get('element');
       jqcanv = $(canvas);
       context = canvas.getContext('2d');
@@ -17,6 +17,14 @@
       if (this.get('options') !== void 0) {
         options = this.get('options');
       }
+      this.setProperties({
+        'canvas': canvas,
+        'options': options
+      });
+      return this.onUpdateElement();
+    },
+    graphData: (function() {
+      var data;
       data = {
         labels: this.generateLables(),
         datasets: this.get('data')
@@ -24,10 +32,12 @@
       if (this.get('type') === 'PolarArea') {
         data = this.get('data');
       }
-      return chart = new Chart(context)[this.get('type')](data, options);
-    },
+      return data;
+    }).property('data'),
     onUpdateElement: (function() {
-      return console.log('a');
+      var context;
+      context = this.get('canvas').getContext('2d');
+      return this.set('chart', new Chart(context)[this.get('type')](this.get('graphData'), this.get('options')));
     }).observes('data'),
     generateLables: function() {
       var h, i, lables, m, _i, _j, _k, _l, _ref;
@@ -365,7 +375,6 @@
       animationSteps: 20
     },
     updateGraphs: (function() {
-      this.rerender();
       return this.set('controller.loading', false);
     }).observes('controller.datasetOne')
   });

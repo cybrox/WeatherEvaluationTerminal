@@ -10,12 +10,18 @@ App.GraphCanvasComponent = Ember.Component.extend
 
     options = {}
     options = @get('options') if @get('options') != undefined
+    @setProperties({'canvas': canvas, 'options': options})
+    @onUpdateElement()
+
+  graphData: (->
     data = {labels: @generateLables(), datasets: @get('data')}
     data = @get('data') if @get('type') == 'PolarArea'
-    chart = new Chart(context)[@get('type')](data, options)
+    data
+  ).property('data')
 
   onUpdateElement: (->
-    console.log('a')
+    context = @get('canvas').getContext('2d')
+    @set('chart', new Chart(context)[@get('type')](@get('graphData'), @get('options')))
   ).observes('data')
 
   generateLables: ->
