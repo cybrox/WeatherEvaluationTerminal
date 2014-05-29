@@ -51,7 +51,7 @@
 	<script type="text/x-handlebars" id="weather">
 		{{#if loading}} <p id="loader" class="btn btn-primary">Lade...</p> {{/if}}
 
-		<section id="contentInner" class="panel panel-default">
+		<section id="weatherdata" class="panel panel-default">
 			<div id="monthselect" class="panel-heading">
 				<button {{action 'goPrev'}} class="btn btn-primary pull-left">&#xab; {{prevMonth}}</button>
 				Wetterdaten Monatsansicht &bull; {{currentMonth}}
