@@ -14,6 +14,10 @@ App.GraphCanvasComponent = Ember.Component.extend
     data = @get('data') if @get('type') == 'PolarArea'
     chart = new Chart(context)[@get('type')](data, options)
 
+  onUpdateElement: (->
+    console.log('a')
+  ).observes('data')
+
   generateLables: ->
     lables = []
     if @get('range') == 'month'

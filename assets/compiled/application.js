@@ -26,6 +26,9 @@
       }
       return chart = new Chart(context)[this.get('type')](data, options);
     },
+    onUpdateElement: (function() {
+      return console.log('a');
+    }).observes('data'),
     generateLables: function() {
       var h, i, lables, m, _i, _j, _k, _l, _ref;
       lables = [];
