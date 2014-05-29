@@ -173,7 +173,7 @@
         }
       }
       return this.generateDatasets('day', dayData);
-    }).observes('selectedDay'),
+    }).observes('content', 'selectedDay'),
     generateDatasets: function(scope, dataIs) {
       var avgHm, avgRv, avgTm, avgWs, data, dataHm, dataRv, dataTm, dataWd, dataWs, day, days, dd, graphdataDir, graphdataOne, graphdataTwo, num, _i;
       avgTm = 0;

@@ -61,7 +61,7 @@ App.WeatherController = Ember.Controller.extend
         dayNumr++;
 
     @generateDatasets('day', dayData)
-  ).observes('selectedDay')
+  ).observes('content', 'selectedDay')
 
 
 
