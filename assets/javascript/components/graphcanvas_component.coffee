@@ -31,12 +31,11 @@ App.GraphCanvasComponent = Ember.Component.extend
         lables.push @stp(m)
 
     else if @get('range') == 'day'
-      for h in [0...24]
-        for m in [0...60] by 15
-          lables.push @stp(h)+':'+@stp(m)
-
-      # Remove some lables for space
-      lables[(i-1)] = "" for i in [0..lables.length] by 2
+      for h in [0..24]
+          lables.push @stp(h)+':00'
+          lables.push ''
+          lables.push ''
+          lables.push ''
         
     else if @get('range') == 'direction'
       lables = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW']

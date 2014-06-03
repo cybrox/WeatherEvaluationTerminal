@@ -40,20 +40,18 @@
       return this.set('chart', new Chart(context)[this.get('type')](this.get('graphData'), this.get('options')));
     }).observes('data'),
     generateLables: function() {
-      var h, i, lables, m, _i, _j, _k, _l, _ref;
+      var h, lables, m, _i, _j;
       lables = [];
       if (this.get('range') === 'month') {
         for (m = _i = 1; _i <= 31; m = ++_i) {
           lables.push(this.stp(m));
         }
       } else if (this.get('range') === 'day') {
-        for (h = _j = 0; _j < 24; h = ++_j) {
-          for (m = _k = 0; _k < 60; m = _k += 15) {
-            lables.push(this.stp(h) + ':' + this.stp(m));
-          }
-        }
-        for (i = _l = 0, _ref = lables.length; _l <= _ref; i = _l += 2) {
-          lables[i - 1] = "";
+        for (h = _j = 0; _j <= 24; h = ++_j) {
+          lables.push(this.stp(h) + ':00');
+          lables.push('');
+          lables.push('');
+          lables.push('');
         }
       } else if (this.get('range') === 'direction') {
         lables = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'];
@@ -382,14 +380,6 @@
   });
 
   App.WeatherView = Ember.View.extend({
-    init: function() {
-      window.onresize = function(e) {
-        return setTimeout(function() {
-          return location.reload();
-        }, 500);
-      };
-      return this._super();
-    },
     lineOptions: {
       datasetFill: false,
       scaleLineWidth: 2,
