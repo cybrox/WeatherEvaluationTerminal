@@ -13,8 +13,8 @@
 
     protected $cdb;
 
-    public function __construct(){
-      $this->cdb = new crunchDB('../data/');
+    public function __construct($path){
+      $this->cdb = new crunchDB($path);
     }
 
     public function _call($reqFunc, $reqArgs){

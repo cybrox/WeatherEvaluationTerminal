@@ -14,7 +14,7 @@
   require_once('./lib/crunchroot.class.php');
   require_once('./lib/crunchtable.class.php');
 
-  $wetapi = new WetApi();
+  $wetapi = new WetApi('../data/');
 
   $requestLink = explode("/api/", $_SERVER['REQUEST_URI']);
   $requestData = explode("/", $requestLink[1]);
