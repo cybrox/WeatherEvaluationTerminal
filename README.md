@@ -14,4 +14,5 @@ The Wether Evaluation Tool Webinterface is a simple server sided overview of the
 ## Precompiler instructions
 ```
 coffee --join assets/compiled/application.js --compile assets/javascript/*
+uglifyjs assets/compiled/application.js --output assets/compiled/application.min.js
 ```
