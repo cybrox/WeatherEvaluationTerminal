@@ -20,6 +20,7 @@
   $requestData = explode("/", $requestLink[1]);
 
   if(count($requestData) < 2) $wetapi->publish(false, 'invalid api call, no method selected');
+  if($requestData[0] == 'create') { die("You may not publish custom data on this page."); }
 
   $requestFunc = $requestData[0].'_'.$requestData[1];
   array_splice($requestData, 0, 2);

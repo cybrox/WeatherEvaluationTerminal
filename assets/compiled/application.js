@@ -165,7 +165,7 @@
       _ref = this.get('content').data;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         element = _ref[_i];
-        if (element.day === parseInt(thisDay)) {
+        if (parseInt(element.day) === parseInt(thisDay)) {
           dayData[dayNumr] = element;
           dayNumr++;
         }

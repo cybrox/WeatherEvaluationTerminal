@@ -56,7 +56,7 @@ App.WeatherController = Ember.Controller.extend
     dayData = {}
 
     for element in @get('content').data
-      if element.day == parseInt(thisDay)
+      if parseInt(element.day) == parseInt(thisDay)
         dayData[dayNumr] = element
         dayNumr++;
 

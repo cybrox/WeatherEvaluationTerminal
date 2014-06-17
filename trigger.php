@@ -10,6 +10,8 @@
   *
   * Automatically pull data from a online weather API
   * to get valid weather data to display.
+  * This API read trigger will be called by a cronjob
+  * every 15 minutes by https://cron-job.org/
   */
 
   require_once('api/wetapi.class.php');
